@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メイン画面 - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; メイン画面</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>メイン画面</h1>
+    <p>アプリを起動するとメイン画面（編集画面）が開きます。画面は端末の向きに合わせて縦向き・横向きに自動で切り替わります。</p>
+
+    <figure class="figure">
+      <img src="../pic/mase_Screenshot.png" alt="mase メイン画面（横向き）のスクリーンショット" style="max-width: 720px;">
+      <figcaption>メイン画面（横向き）の例</figcaption>
+    </figure>
+
+    <h2>画面の構成</h2>
+    <p>メイン画面は次の 5 つの領域で構成されています。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>領域</th>
+            <th>役割</th>
+            <th>詳細ページ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. 上部バー</strong></td>
+            <td>メインメニュー（≡）、データファイル名・音声情報、L / R スイッチ</td>
+            <td>このページの下部</td>
+          </tr>
+          <tr>
+            <td><strong>2. 波形ビュー</strong></td>
+            <td>音声波形の詳細表示、拡大・スクロール、選択範囲の指定</td>
+            <td><a href="view_wave.html">波形ビュー</a></td>
+          </tr>
+          <tr>
+            <td><strong>3. 再生ビュー</strong></td>
+            <td>音声全体の俯瞰表示、シーク、再生・停止・巻き戻し・リピート</td>
+            <td><a href="view_play.html">再生ビュー</a></td>
+          </tr>
+          <tr>
+            <td><strong>4. 開始位置・終了位置の操作ボタン群</strong></td>
+            <td>開始位置・終了位置の数値入力と細かなステップ移動</td>
+            <td><a href="view_startend.html">開始位置・終了位置の操作ボタン群</a></td>
+          </tr>
+          <tr>
+            <td><strong>5. コマンドボタン部</strong></td>
+            <td>折り畳みグループに分かれた各種編集コマンドの実行</td>
+            <td><a href="view_cmdbutton.html">コマンドボタン部</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>横向き画面では、右端（幅 200dp）にコマンドボタン部が縦に並び、左側に上部バー・波形ビュー・再生ビュー・開始位置／終了位置操作ボタン群が配置されます。</p>
+
+    <h2>上部バーの詳細</h2>
+
+    <figure class="figure">
+      <img src="../pic/view_top.png" alt="上部バー（メニューボタン、データファイル名、L/R スイッチ）" style="max-width: 720px;">
+      <figcaption>上部バーの表示例</figcaption>
+    </figure>
+
+    <h3>メインメニュー（≡）</h3>
+    <p>画面左上の三本線ボタン（<kbd>≡</kbd>）を押すとメニューが開きます。音声データを開いていない状態でも利用できます。</p>
+    <ul>
+      <li><strong>設定</strong>：<a href="setting.html">設定画面</a> を開きます（再生中の場合は停止します）。</li>
+      <li><strong>mase について</strong>：アプリ名、バージョン、著作権表示、アプリのライセンス（Apache License Version 2.0）、配布元 URL、NOTICE URL、使用しているライブラリ（LAME 3.100、LGPL v2）の情報を表示します。各 URL はタップして外部アプリ／ブラウザーで開け、<kbd>ライセンスを表示</kbd> からライセンス全文を確認できます。</li>
+    </ul>
+
+    <h3>データファイル名と音声情報</h3>
+    <p>メニューボタンの右に、現在開いているファイルの名前と音声情報が表示されます。</p>
+    <ul>
+      <li><strong>未読み込み時</strong>：<code>（音声データを開いていません）</code></li>
+      <li><strong>保存済み</strong>：<code>voice.wav [48kHz/2ch/4.00000秒/192000サンプル]</code></li>
+      <li><strong>未保存の編集あり</strong>：先頭に <code>* </code> が付きます（例：<code>* voice.wav [48kHz/2ch/4.00000秒/192000サンプル]</code>）</li>
+    </ul>
+    <p>ファイル名が画面幅に収まらないときは、文字を省略せず表示します。指で左右にスクロールして全体を確認できます（編集はできません）。</p>
+
+    <h3 id="lr-switch">L / R チャンネルスイッチ</h3>
+    <p>ファイル名の右端には <kbd>L</kbd> <kbd>R</kbd> の 2 つのトグルスイッチがあります。<strong>ステレオ音声を開いているときだけ</strong>操作できます（モノラル時・未読み込み時は無効になります）。</p>
+    <p>2 つのスイッチは、常に「どちらか一方、または両方がオン」の状態を保ちます。片方だけがオンのときにそのオン側のスイッチを押すと、もう一方へ切り替わります。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>現在の状態</th>
+            <th><kbd>L</kbd> を押す</th>
+            <th><kbd>R</kbd> を押す</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>L=オン、R=オン</td>
+            <td>L=オフ、R=オン</td>
+            <td>L=オン、R=オフ</td>
+          </tr>
+          <tr>
+            <td>L=オン、R=オフ</td>
+            <td>L=オフ、R=オン（入れ替え）</td>
+            <td>L=オン、R=オン</td>
+          </tr>
+          <tr>
+            <td>L=オフ、R=オン</td>
+            <td>L=オン、R=オン</td>
+            <td>L=オン、R=オフ（入れ替え）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>オンになっているスイッチは、波形ビューの「ステレオの L だけの部分」「ステレオの R だけの部分」と同じ色で表示されます（設定画面で色を変えると連動します）。スイッチの状態はアプリ終了まで保持されます。</p>
+
+    <p>L / R スイッチには次の 4 つの働きがあります：</p>
+    <ol>
+      <li><strong>波形ビューの表示</strong>：片方だけオンのときは、波形ビューにそのチャンネルだけを表示します（再生ビューは常に両方表示します）。</li>
+      <li><strong>再生出力の切り替え</strong>：オンのチャンネルだけを鳴らし、オフのチャンネルを無音にします。再生中に切り替えるとリアルタイムに反映されます。</li>
+      <li><strong>加工対象の絞り込み</strong>：音声データの長さが変わらない加工（貼り付け・音量の変更・音量の最大化・無音化・フェードイン／フェードアウト・位相反転・逆再生・音のミックス・再生時間維持の音程変更）で、オフのチャンネルを元のまま残します。<br>※「チャンネル入れ替え」はスイッチに関係なく常に L と R を入れ替えます。長さが変わる加工やコピー等も全チャンネル対象です。</li>
+      <li><strong>無音・発音区間の判定</strong>：「<a href="group_select.html">無音区間を選択</a>」「<a href="group_select.html">発音区間を選択</a>」で、オンのチャンネルだけを見て無音判定を行います。</li>
+    </ol>
+
+    <h2>画面の回転とライト／ダークモード</h2>
+    <ul>
+      <li><strong>画面の回転</strong>：回転しても音声データ、選択範囲、再生、履歴、コピーバッファ、表示中のダイアログはそのまま維持されます。</li>
+      <li><strong>ライト／ダークモード</strong>：端末の設定に合わせて UI の配色が自動で切り替わります。波形ビューと再生ビューの中身の色は、端末のモードに関わらず<a href="setting.html">設定画面</a>の配色で描画されます。</li>
+    </ul>
+
+    <h2>アプリの終了</h2>
+    <p>未保存の編集がある状態で戻るボタンを押すと、確認ダイアログが表示されます。</p>
+    <ul>
+      <li><kbd>保存して終了</kbd>：「保存」を実行し、正常に保存できたときだけ終了します。</li>
+      <li><kbd>保存しないで終了</kbd>：変更を破棄して終了します。</li>
+      <li><kbd>キャンセル</kbd>：終了を取りやめて編集画面に戻ります。</li>
+    </ul>
+    <div class="warn">
+      <strong>注意：</strong>アプリを終了すると、編集中の音声データ・アンドゥ履歴・コピーバッファは破棄されます。タスクキルや OS による強制終了時は確認ダイアログは出ず、未保存のデータは失われます。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="index.html">&larr; 前へ：目次</a>
+      <a href="index.html">目次</a>
+      <a href="view_wave.html">次へ：波形ビュー &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

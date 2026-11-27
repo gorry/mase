@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「アンドゥ」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「アンドゥ」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「アンドゥ」グループ</h1>
+    <p>音声データに対する編集を取り消したり、取り消した編集をやり直したりするコマンド群です。</p>
+
+    <h2>元に戻す</h2>
+    <p>直前に行った編集を 1 つ取り消し、音声データと開始位置・終了位置を編集前の状態に戻します。元に戻せる履歴がないときは無効になります。</p>
+
+    <h2>やり直す</h2>
+    <p><kbd>元に戻す</kbd> で取り消した編集を 1 つやり直します。やり直せる履歴がないとき、または元に戻した後に別の編集を行ったときは無効になります。</p>
+
+    <h2>履歴の仕様と注意点</h2>
+    <ul>
+      <li><strong>対象となる操作</strong>：音声データを変更するすべての編集コマンドと、「再生レートの変更」が履歴に記録されます。コピーや無音／発音区間の選択など、音声データを変えない操作は記録されません。</li>
+      <li><strong>最大回数</strong>：初期値は <strong>10 回</strong> です。<a href="setting.html">設定画面</a>の「元に戻す」で 0〜99 回の範囲で変更できます（0 にすると履歴を保存しません）。</li>
+      <li><strong>メモリ不足時の挙動</strong>：最大回数を超えた場合やメモリが不足した場合は、古い履歴から自動的に削除されます。履歴を 1 つも保存できないほどメモリが足りない場合は編集が中止されますので、設定画面で最大回数を 0 にすると実行できることがあります。</li>
+      <li><strong>履歴が消えるタイミング</strong>：新しい音声ファイルを開いたとき、および保存後に「保存した内容で置き換える」を選んだときに履歴は空になります。</li>
+      <li><strong>未保存状態の扱い</strong>：<kbd>元に戻す</kbd>・<kbd>やり直す</kbd> を実行した後は、安全のため常に未保存状態（<code>* </code> 付き）になります。</li>
+      <li><strong>コピーバッファ</strong>：コピーバッファの内容はアンドゥ・リドゥの対象外です。</li>
+    </ul>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_file.html">&larr; 前へ：「ファイル」グループ</a>
+      <a href="index.html">目次</a>
+      <a href="group_select.html">次へ：「選択」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name は Profile.ini の [Title] ShortText から作る（app/build.gradle） -->
+
+    <string name="no_data_name">(No audio file open)</string>
+    <string name="unsaved_name">* %1$s</string>
+    <!-- ファイル名の後ろに表示する、サンプリングレート、チャンネル数、全体の長さ -->
+    <string name="data_length">[%1$skHz/%2$dch/%3$ss/%4$d samples]</string>
+
+    <!-- メニュー -->
+    <string name="menu">Menu</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About %1$s</string>
+
+    <!-- 設定画面 -->
+    <string name="settings_colors">Colors</string>
+    <string name="color_background">Background</string>
+    <string name="color_selection">Selection background</string>
+    <string name="color_mono">Mono waveform</string>
+    <string name="color_left">Stereo L only</string>
+    <string name="color_right">Stereo R only</string>
+    <string name="color_overlap">Stereo L/R overlap</string>
+    <string name="color_start_bar">Start bar</string>
+    <string name="color_end_bar">End bar</string>
+    <string name="color_play_position">Play position</string>
+    <string name="color_grid_light">Grid lines (light)</string>
+    <string name="color_grid_medium">Grid lines (medium)</string>
+    <string name="color_grid_dark">Grid lines (dark)</string>
+    <string name="settings_silence">Silence detection</string>
+    <string name="settings_silence_ms">Duration (ms, 1–1000)</string>
+    <string name="settings_silence_volume">Silence threshold</string>
+    <string name="settings_silence_large">High</string>
+    <string name="settings_silence_medium">Medium</string>
+    <string name="settings_silence_small">Low</string>
+    <string name="settings_undo">Undo</string>
+    <string name="settings_undo_max">Max undo steps (0–99)</string>
+    <string name="settings_reset">Reset to defaults</string>
+
+    <!-- アプリの情報 -->
+    <string name="about_version">Version %1$s</string>
+    <string name="about_license">License: %1$s</string>
+    <string name="about_distributor">Distributed at: %1$s</string>
+    <string name="about_notice">NOTICE: %1$s</string>
+    <string name="about_show_license">View license</string>
+    <string name="about_libraries">Libraries</string>
+    <string name="about_lame_usage">Used for MP3 export.</string>
+    <string name="err_license">Unable to display license.</string>
+    <string name="err_open_url">No app available to open this link.</string>
+    <string name="close">Close</string>
+
+    <!-- 再生ビューのボタン -->
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="rewind">Rewind</string>
+    <string name="repeat">Repeat</string>
+    <string name="err_cannot_play">Cannot play at this sample rate. Change the sample rate to play.</string>
+
+    <!-- 開始位置・終了位置の操作 -->
+    <string name="start_position">Start position</string>
+    <string name="end_position">End position</string>
+    <string name="start_label">Start</string>
+    <string name="end_label">End</string>
+    <string name="unit_seconds">sec</string>
+    <string name="unit_samples">samples</string>
+
+    <!-- 加工するチャンネルのスイッチ（ファイル名の右） -->
+    <string name="channel_left">Process left channel</string>
+    <string name="channel_right">Process right channel</string>
+    <string name="unit_db">dB</string>
+    <string name="unit_hz">Hz</string>
+    <string name="unit_semitones">semitones</string>
+
+    <!-- 編集コマンドのグループ（折り畳みの見出し） -->
+    <string name="group_file">File</string>
+    <string name="group_undo">Undo</string>
+    <string name="group_select">Select</string>
+    <string name="group_edit">Edit</string>
+    <string name="group_process_selection">Process selection</string>
+    <string name="group_process_all">Process all</string>
+    <string name="group_add_sound">Add sound</string>
+    <string name="group_opened">▼ %1$s</string>
+    <string name="group_closed">▶ %1$s</string>
+
+    <!-- 編集コマンド -->
+    <string name="cmd_open">Open</string>
+    <string name="cmd_save">Save</string>
+    <string name="cmd_save_as">Save as</string>
+    <string name="cmd_save_selection">Save selection</string>
+    <string name="cmd_undo">Undo</string>
+    <string name="cmd_redo">Redo</string>
+    <string name="cmd_select_silence">Select silence</string>
+    <string name="cmd_select_sound">Select sound</string>
+    <string name="cmd_trim">Trim</string>
+    <string name="cmd_cut">Cut</string>
+    <string name="cmd_copy">Copy</string>
+    <string name="cmd_paste">Paste</string>
+    <string name="cmd_insert">Insert</string>
+    <string name="cmd_append">Append</string>
+
+    <string name="cmd_volume">Change volume</string>
+    <string name="cmd_normalize">Normalize</string>
+    <string name="cmd_mute">Mute</string>
+    <string name="cmd_fade_in">Fade in</string>
+    <string name="cmd_fade_out">Fade out</string>
+    <string name="cmd_invert">Invert phase</string>
+    <string name="cmd_reverse">Reverse</string>
+    <string name="cmd_swap_channels">Swap channels</string>
+
+    <string name="cmd_pitch">Change pitch</string>
+    <string name="cmd_resample">Change sample rate</string>
+    <string name="cmd_play_rate">Change playback rate</string>
+    <string name="cmd_channels">Change channels</string>
+
+    <string name="cmd_mix_sound">Mix sound</string>
+    <string name="cmd_insert_sound">Insert / append sound</string>
+    <string name="btn_insert_at_start">Insert at start</string>
+
+    <!-- 編集コマンドのダイアログ -->
+    <string name="label_volume">Volume</string>
+    <string name="label_normalize">Peak level</string>
+    <string name="label_fade_in">Start level</string>
+    <string name="label_fade_out">End level</string>
+    <string name="current_rate">Current sample rate: %1$d Hz</string>
+    <string name="current_play_rate">Current playback rate: %1$d Hz</string>
+    <string name="rate_item">%1$d Hz</string>
+    <string name="label_new_rate">New rate</string>
+    <string name="label_pitch">Pitch shift</string>
+    <string name="note_pitch">(12 = 1 octave)</string>
+    <string name="keep_duration">Keep duration</string>
+    <string-array name="algorithms">
+        <item>Nearest neighbor</item>
+        <item>Linear interpolation</item>
+        <item>Cubic interpolation (Catmull-Rom)</item>
+        <item>Windowed sinc (standard)</item>
+        <item>Windowed sinc (high quality)</item>
+    </string-array>
+    <string name="mono_title">Convert to mono</string>
+    <string name="mono_left">L only</string>
+    <string name="mono_right">R only</string>
+    <string name="mono_mix">Mix L+R</string>
+    <string name="processing">Processing…</string>
+    <string name="percent">%1$d%%</string>
+    <string name="err_edit_failed">Operation failed. Please try again.</string>
+    <string name="err_not_in_silence">The start position is not in a silent region. Move it to a silent region.</string>
+    <string name="err_not_in_sound">The start position is not in a sound region. Move it to a sound region.</string>
+    <string name="err_cut_all">Cannot cut the entire audio.</string>
+    <string name="err_memory_edit">Not enough memory to perform this operation. Setting \"Max undo steps\" to 0 in Settings may help.</string>
+
+    <!-- 音の追加 -->
+    <string name="heading_base_sound">Original sound</string>
+    <string name="label_kind">Type</string>
+    <string name="label_length_name">Length</string>
+    <string name="label_algorithm_short">Resampling</string>
+    <string name="label_frequency_name">Frequency</string>
+    <string name="label_sound_to_mix">Sound to mix</string>
+    <string name="label_sound_to_insert">Sound to insert</string>
+    <string name="sound_silence">Silence</string>
+    <string name="sound_sine">Sine wave</string>
+    <string name="sound_square">Square wave</string>
+    <string name="sound_file">Audio file</string>
+    <string name="label_sound_volume">Volume</string>
+    <string name="file_not_selected">(No file chosen)</string>
+    <string name="length_whole_file">Entire file</string>
+    <string name="length_specified">Specify length</string>
+    <string name="sound_repeat">Repeat</string>
+    <string name="err_bad_volume">The volume is not valid.</string>
+    <string name="err_bad_frequency">The frequency is not valid.</string>
+    <string name="err_bad_length">The length is not valid.</string>
+    <string name="err_length_over">The length exceeds the limit. Enter %1$s seconds or less.</string>
+    <string name="err_no_file">Choose an audio file.</string>
+    <string name="err_too_many_channels">Files with 3 or more channels cannot be used. Choose a mono or stereo file.</string>
+    <string name="err_no_room">Cannot insert because the audio has reached the maximum length.</string>
+
+    <!-- 保存 -->
+    <string name="label_format">Format</string>
+    <string name="label_bits">Bit depth</string>
+    <string name="label_bit_rate">Bit rate</string>
+    <string name="bits_item">%1$d-bit</string>
+    <string name="bit_rate_item">%1$d kbps</string>
+    <string name="saving">Saving…</string>
+    <string name="err_save">Failed to save. Try a different destination.</string>
+    <string name="ask_replace">Replace the current audio with the saved file?</string>
+    <string name="replace">Replace</string>
+    <string name="dont_replace">Don\'t replace</string>
+    <string name="ask_unsaved">There are unsaved changes. Save before continuing?</string>
+    <string name="save_and_open">Save and open</string>
+    <string name="open_without_saving">Open without saving</string>
+    <string name="save_and_exit">Save and exit</string>
+    <string name="exit_without_saving">Exit without saving</string>
+
+    <!-- 読み込み -->
+    <string name="loading">Loading…</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_channels_title">Select channels to load (up to 2)</string>
+    <string name="channel_item">Channel %1$d</string>
+    <string name="warn_too_long">Audio is too long. The trailing data will be truncated.</string>
+    <string name="err_cannot_open">Unable to open file. Please choose another file.</string>
+    <string name="err_unsupported">Unsupported file format. Please choose a wav, mp3, or mp4 file.</string>
+    <string name="err_corrupt">Unable to open file because it is corrupted. Please choose another file.</string>
+    <string name="err_no_audio">This file contains no audio. Please choose another file.</string>
+    <string name="err_memory">Not enough memory to open this file. Close other apps and try again.</string>
+</resources>

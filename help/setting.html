@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>設定画面 - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 設定画面</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>設定画面</h1>
+    <p>メイン画面左上のメニューボタン（<kbd>≡</kbd>）から「<strong>設定</strong>」を選ぶと設定画面が開きます（再生中の場合は自動停止します）。</p>
+    <p>設定は変更すると自動的に保存・反映されます（保存ボタンはありません）。画面上部の <kbd>閉じる</kbd> ボタン、または端末の戻るボタンでメイン画面に戻ります。</p>
+
+    <details class="figure-details">
+      <summary>設定画面全体のスクリーンショットを表示</summary>
+      <figure class="figure">
+        <img src="../pic/setting.png" alt="設定画面全体のスクリーンショット" style="max-width: 420px;">
+        <figcaption>設定画面全体</figcaption>
+      </figure>
+    </details>
+
+    <h2>色の設定</h2>
+    <p>波形ビューおよび再生ビューに描かれる各要素の色をカスタマイズできます。設定は両ビューで共通です（また、ステレオの L / R の色は上部バーの <kbd>L</kbd> / <kbd>R</kbd> スイッチの色にも連動します）。</p>
+
+    <figure class="figure">
+      <img src="../pic/setting_color.png" alt="設定画面「色の設定」" style="max-width: 420px;">
+      <figcaption>色の設定</figcaption>
+    </figure>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>初期値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>背景</strong></td>
+            <td><span class="swatch" style="background:#000000;"></span>黒</td>
+          </tr>
+          <tr>
+            <td><strong>選択範囲の背景</strong></td>
+            <td><span class="swatch" style="background:#404040;"></span>グレー</td>
+          </tr>
+          <tr>
+            <td><strong>モノラルの波形</strong></td>
+            <td><span class="swatch" style="background:#cccccc;"></span>やや輝度を下げた白</td>
+          </tr>
+          <tr>
+            <td><strong>ステレオの L だけの部分</strong></td>
+            <td><span class="swatch" style="background:#00d800;"></span>緑</td>
+          </tr>
+          <tr>
+            <td><strong>ステレオの R だけの部分</strong></td>
+            <td><span class="swatch" style="background:#ff2020;"></span>赤</td>
+          </tr>
+          <tr>
+            <td><strong>ステレオの L と R が重なる部分</strong></td>
+            <td><span class="swatch" style="background:#cccccc;"></span>やや輝度を下げた白</td>
+          </tr>
+          <tr>
+            <td><strong>開始位置のバー</strong></td>
+            <td><span class="swatch" style="background:#ffffff;"></span>最大輝度の白</td>
+          </tr>
+          <tr>
+            <td><strong>終了位置のバー</strong></td>
+            <td><span class="swatch" style="background:#ffffff;"></span>最大輝度の白</td>
+          </tr>
+          <tr>
+            <td><strong>再生位置</strong></td>
+            <td><span class="swatch" style="background:#ffffff;"></span>最大輝度の白</td>
+          </tr>
+          <tr>
+            <td><strong>目盛りの線（薄）</strong></td>
+            <td><span class="swatch" style="background:rgba(127,255,255,0.25);"></span><code>#7FFFFF</code>（不透明度 A=64）</td>
+          </tr>
+          <tr>
+            <td><strong>目盛りの線（中）</strong></td>
+            <td><span class="swatch" style="background:rgba(127,255,255,0.63);"></span><code>#7FFFFF</code>（不透明度 A=160）</td>
+          </tr>
+          <tr>
+            <td><strong>目盛りの線（濃）</strong></td>
+            <td><span class="swatch" style="background:rgba(127,255,255,0.88);"></span><code>#7FFFFF</code>（不透明度 A=224、0 レベル水平線・時刻文字と共通）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>カラーピッカー</strong>：各項目の行をタップするとカラーピッカーが開き、R・G・B・A（0〜255）をスライダーまたは数値入力で調整できます。変更はその場で反映されます。</li>
+      <li><strong>初期値に戻す</strong>：「色の設定」にある <kbd>初期値に戻す</kbd> ボタンを押すと、すべての色設定を確認なしで初期値に戻します。</li>
+    </ul>
+
+    <h2>無音の判定</h2>
+    <p>「<a href="group_select.html">選択</a>」グループの「無音区間を選択」「発音区間を選択」で使う無音判定の条件を設定します。</p>
+
+    <figure class="figure">
+      <img src="../pic/setting_silence.png" alt="設定画面「無音の判定」" style="max-width: 420px;">
+      <figcaption>無音の判定</figcaption>
+    </figure>
+    <ul>
+      <li><strong>判定する期間の長さ（ミリ秒、1〜1000）</strong>：無音が続いているとみなす期間の長さです（初期値：<code>10</code> ミリ秒）。</li>
+      <li><strong>無音の音量</strong>：無音とみなす振幅のしきい値です（範囲：<code>-96</code> 〜 <code>0</code> dB、初期値：<code>-54</code> dB）。小数での数値入力、1 dB 刻みのスライダー、または下のプリセットボタンで設定できます。</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>プリセットボタン</th>
+            <th>値（dB）</th>
+            <th>目安の振幅（16 ビット）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><kbd>小</kbd></td>
+            <td><code>-66</code> dB</td>
+            <td>約 32</td>
+          </tr>
+          <tr>
+            <td><kbd>中</kbd>（初期値）</td>
+            <td><code>-54</code> dB</td>
+            <td>約 128</td>
+          </tr>
+          <tr>
+            <td><kbd>大</kbd></td>
+            <td><code>-42</code> dB</td>
+            <td>約 512</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>「無音の判定」にある <kbd>初期値に戻す</kbd> ボタンを押すと、期間の長さ（10 ミリ秒）と無音の音量（-54.0 dB）を確認なしで初期値に戻します。</p>
+
+    <h2>元に戻す</h2>
+
+    <figure class="figure">
+      <img src="../pic/setting_undo.png" alt="設定画面「元に戻す」" style="max-width: 420px;">
+      <figcaption>元に戻す</figcaption>
+    </figure>
+    <ul>
+      <li><strong>元に戻せる最大回数（0〜99）</strong>：「<a href="group_undo.html">アンドゥ</a>」グループで記憶する編集履歴の最大件数です（初期値：<code>10</code>）。</li>
+      <li><code>0</code> を指定すると履歴を保存しなくなるため、長い音声でメモリが不足して編集できないときの回避策としても利用できます。</li>
+      <li>現在保持している履歴数より小さい値に変更した場合は、超過した古い履歴がその場で削除されます。</li>
+    </ul>
+
+    <div class="note">
+      <strong>数値入力の反映タイミング：</strong>「判定する期間の長さ」「無音の音量」「元に戻せる最大回数」の数値入力欄は、キーボードの確定を押したとき・別の場所へ移動したとき・設定画面を閉じたときに反映されます。範囲外の値や空欄のまま確定した場合は、元の設定値に戻ります。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_add_sound.html">&larr; 前へ：「音の追加」グループ</a>
+      <a href="index.html">目次</a>
+      <span></span>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

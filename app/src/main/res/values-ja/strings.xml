@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name は Profile.ini の [Title] ShortText から作る（app/build.gradle） -->
+
+    <string name="no_data_name">（音声データを開いていません）</string>
+    <string name="unsaved_name">* %1$s</string>
+    <!-- ファイル名の後ろに表示する、サンプリングレート、チャンネル数、全体の長さ -->
+    <string name="data_length">[%1$skHz/%2$dch/%3$s秒/%4$dサンプル]</string>
+
+    <!-- メニュー -->
+    <string name="menu">メニュー</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_about">%1$s について</string>
+
+    <!-- 設定画面 -->
+    <string name="settings_colors">色の設定</string>
+    <string name="color_background">背景</string>
+    <string name="color_selection">選択範囲の背景</string>
+    <string name="color_mono">モノラルの波形</string>
+    <string name="color_left">ステレオの L だけの部分</string>
+    <string name="color_right">ステレオの R だけの部分</string>
+    <string name="color_overlap">ステレオの L と R が重なる部分</string>
+    <string name="color_start_bar">開始位置のバー</string>
+    <string name="color_end_bar">終了位置のバー</string>
+    <string name="color_play_position">再生位置</string>
+    <string name="color_grid_light">目盛りの線（薄）</string>
+    <string name="color_grid_medium">目盛りの線（中）</string>
+    <string name="color_grid_dark">目盛りの線（濃）</string>
+    <string name="settings_silence">無音の判定</string>
+    <string name="settings_silence_ms">判定する期間の長さ（ミリ秒、1～1000）</string>
+    <string name="settings_silence_volume">無音の音量</string>
+    <string name="settings_silence_large">大</string>
+    <string name="settings_silence_medium">中</string>
+    <string name="settings_silence_small">小</string>
+    <string name="settings_undo">元に戻す</string>
+    <string name="settings_undo_max">元に戻せる最大回数（0～99）</string>
+    <string name="settings_reset">初期値に戻す</string>
+
+    <!-- アプリの情報 -->
+    <string name="about_version">バージョン %1$s</string>
+    <string name="about_license">ライセンス：%1$s</string>
+    <string name="about_distributor">配布元：%1$s</string>
+    <string name="about_notice">NOTICE：%1$s</string>
+    <string name="about_show_license">ライセンスを表示</string>
+    <string name="about_libraries">使用しているライブラリ</string>
+    <string name="about_lame_usage">mp3 の保存に使用しています。</string>
+    <string name="err_license">ライセンスを表示できません。</string>
+    <string name="err_open_url">リンクを開けるアプリがありません。</string>
+    <string name="close">閉じる</string>
+
+    <!-- 再生ビューのボタン -->
+    <string name="play">再生</string>
+    <string name="stop">停止</string>
+    <string name="rewind">巻き戻し</string>
+    <string name="repeat">リピート</string>
+    <string name="err_cannot_play">このサンプリングレートでは再生できません。サンプリングレートを変更すると再生できます。</string>
+
+    <!-- 開始位置・終了位置の操作 -->
+    <string name="start_position">開始位置</string>
+    <string name="end_position">終了位置</string>
+    <string name="start_label">開始</string>
+    <string name="end_label">終了</string>
+    <string name="unit_seconds">秒</string>
+    <string name="unit_samples">サンプル</string>
+
+    <!-- 加工するチャンネルのスイッチ（ファイル名の右） -->
+    <string name="channel_left">L チャンネルを加工する</string>
+    <string name="channel_right">R チャンネルを加工する</string>
+    <string name="unit_db">dB</string>
+    <string name="unit_hz">Hz</string>
+    <string name="unit_semitones">半音</string>
+
+    <!-- 編集コマンドのグループ（折り畳みの見出し） -->
+    <string name="group_file">ファイル</string>
+    <string name="group_undo">アンドゥ</string>
+    <string name="group_select">選択</string>
+    <string name="group_edit">編集</string>
+    <string name="group_process_selection">選択範囲の加工</string>
+    <string name="group_process_all">全体の加工</string>
+    <string name="group_add_sound">音の追加</string>
+    <string name="group_opened">▼ %1$s</string>
+    <string name="group_closed">▶ %1$s</string>
+
+    <!-- 編集コマンド -->
+    <string name="cmd_open">開く</string>
+    <string name="cmd_save">保存</string>
+    <string name="cmd_save_as">名前を付けて保存</string>
+    <string name="cmd_save_selection">選択範囲を保存</string>
+    <string name="cmd_undo">元に戻す</string>
+    <string name="cmd_redo">やり直す</string>
+    <string name="cmd_select_silence">無音区間を選択</string>
+    <string name="cmd_select_sound">発音区間を選択</string>
+    <string name="cmd_trim">トリム</string>
+    <string name="cmd_cut">カット</string>
+    <string name="cmd_copy">コピー</string>
+    <string name="cmd_paste">貼り付け</string>
+    <string name="cmd_insert">挿入</string>
+    <string name="cmd_append">末尾に追加</string>
+
+    <string name="cmd_volume">音量の変更</string>
+    <string name="cmd_normalize">音量の最大化</string>
+    <string name="cmd_mute">無音化</string>
+    <string name="cmd_fade_in">フェードイン</string>
+    <string name="cmd_fade_out">フェードアウト</string>
+    <string name="cmd_invert">位相反転</string>
+    <string name="cmd_reverse">逆再生</string>
+    <string name="cmd_swap_channels">チャンネル入れ替え</string>
+
+    <string name="cmd_pitch">音程の変更</string>
+    <string name="cmd_resample">サンプリングレートの変更</string>
+    <string name="cmd_play_rate">再生レートの変更</string>
+    <string name="cmd_channels">チャンネル数の変更</string>
+
+    <string name="cmd_mix_sound">音のミックス</string>
+    <string name="cmd_insert_sound">音の挿入・追加</string>
+    <string name="btn_insert_at_start">開始位置に挿入</string>
+
+    <!-- 編集コマンドのダイアログ -->
+    <string name="label_volume">音量</string>
+    <string name="label_normalize">最大のレベル</string>
+    <string name="label_fade_in">開始位置のレベル</string>
+    <string name="label_fade_out">終了位置のレベル</string>
+    <string name="current_rate">現在のサンプリングレート：%1$d Hz</string>
+    <string name="current_play_rate">現在の再生レート：%1$d Hz</string>
+    <string name="rate_item">%1$d Hz</string>
+    <string name="label_new_rate">変更後</string>
+    <string name="label_pitch">音程差</string>
+    <string name="note_pitch">（12 で 1 オクターブ）</string>
+    <string name="keep_duration">再生時間を維持する</string>
+    <string-array name="algorithms">
+        <item>最近傍</item>
+        <item>線形補間</item>
+        <item>3 次補間（Catmull-Rom）</item>
+        <item>窓関数付き sinc（標準）</item>
+        <item>窓関数付き sinc（高品質）</item>
+    </string-array>
+    <string name="mono_title">モノラルにする方法</string>
+    <string name="mono_left">L のみ</string>
+    <string name="mono_right">R のみ</string>
+    <string name="mono_mix">LR 合成</string>
+    <string name="processing">処理しています…</string>
+    <string name="percent">%1$d%%</string>
+    <string name="err_edit_failed">実行できませんでした。もう一度お試しください。</string>
+    <string name="err_not_in_silence">開始位置が無音区間にありません。開始位置を無音の所へ動かしてください。</string>
+    <string name="err_not_in_sound">開始位置が発音区間にありません。開始位置を音のある所へ動かしてください。</string>
+    <string name="err_cut_all">音声データ全体はカットできません。</string>
+    <string name="err_memory_edit">メモリが足りないため実行できません。設定の「元に戻せる最大回数」を 0 にすると実行できることがあります。</string>
+
+    <!-- 音の追加 -->
+    <string name="heading_base_sound">元の音</string>
+    <string name="label_kind">種類</string>
+    <string name="label_length_name">長さ</string>
+    <string name="label_algorithm_short">変換方法</string>
+    <string name="label_frequency_name">周波数</string>
+    <string name="label_sound_to_mix">ミックスする音</string>
+    <string name="label_sound_to_insert">挿入する音</string>
+    <string name="sound_silence">無音</string>
+    <string name="sound_sine">サイン波</string>
+    <string name="sound_square">矩形波</string>
+    <string name="sound_file">音声ファイル</string>
+    <string name="label_sound_volume">音量</string>
+    <string name="file_not_selected">（ファイルを選択していません）</string>
+    <string name="length_whole_file">ファイル全体</string>
+    <string name="length_specified">長さを指定</string>
+    <string name="sound_repeat">繰り返し</string>
+    <string name="err_bad_volume">音量が正しくありません。</string>
+    <string name="err_bad_frequency">周波数が正しくありません。</string>
+    <string name="err_bad_length">長さが正しくありません。</string>
+    <string name="err_length_over">長さが上限を超えています。%1$s 秒以下で指定してください。</string>
+    <string name="err_no_file">音声ファイルを選択してください。</string>
+    <string name="err_too_many_channels">チャンネル数が 3 以上のファイルは使用できません。モノラルかステレオのファイルを選択してください。</string>
+    <string name="err_no_room">音声データの長さが上限に達しているため挿入できません。</string>
+
+    <!-- 保存 -->
+    <string name="label_format">形式</string>
+    <string name="label_bits">量子化ビット数</string>
+    <string name="label_bit_rate">ビットレート</string>
+    <string name="bits_item">%1$d ビット</string>
+    <string name="bit_rate_item">%1$d kbps</string>
+    <string name="saving">保存しています…</string>
+    <string name="err_save">保存できませんでした。保存先を変えてもう一度お試しください。</string>
+    <string name="ask_replace">保存した内容で、編集中の音声データを置き換えますか？</string>
+    <string name="replace">置き換える</string>
+    <string name="dont_replace">置き換えない</string>
+    <string name="ask_unsaved">音声データが未保存です。保存しますか？</string>
+    <string name="save_and_open">保存して開く</string>
+    <string name="open_without_saving">保存しないで開く</string>
+    <string name="save_and_exit">保存して終了</string>
+    <string name="exit_without_saving">保存しないで終了</string>
+
+    <!-- 読み込み -->
+    <string name="loading">読み込んでいます…</string>
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="choose_channels_title">読み込むチャンネル（2 つまで）</string>
+    <string name="channel_item">チャンネル %1$d</string>
+    <string name="warn_too_long">データが長すぎます。末尾データをカットします。</string>
+    <string name="err_cannot_open">ファイルを開けません。別のファイルを選んでください。</string>
+    <string name="err_unsupported">この形式のファイルは開けません。wav・mp3・mp4 のファイルを選んでください。</string>
+    <string name="err_corrupt">ファイルが壊れているため開けません。別のファイルを選んでください。</string>
+    <string name="err_no_audio">このファイルには音声が入っていません。別のファイルを選んでください。</string>
+    <string name="err_memory">メモリが足りないため開けません。ほかのアプリを終了してからもう一度お試しください。</string>
+</resources>

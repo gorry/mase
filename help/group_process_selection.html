@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「選択範囲の加工」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「選択範囲の加工」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「選択範囲の加工」グループ</h1>
+    <p>開始位置から終了位置までの<strong>選択範囲だけ</strong>に対して音量調整や波形加工を行うコマンド群です。どのコマンドも音声データの長さは変わらず、実行後の選択範囲もそのまま維持されます。</p>
+
+    <h2>音量の変更</h2>
+    <p>選択範囲の音量を dB（デシベル）で増減します。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_volume.png" alt="「音量の変更」ダイアログ" style="max-width: 420px;">
+      <figcaption>「音量の変更」ダイアログ</figcaption>
+    </figure>
+    <ul>
+      <li><strong>指定範囲</strong>：<code>-48</code> 〜 <code>+48</code> dB（初期値 <code>0</code> dB）。小数も入力できます。0 dB で変化なし、+6 dB で約 2 倍、-6 dB で約半分になります。</li>
+      <li>範囲外の値を入力した場合は端の値（-48 または +48 dB）で実行されます。16 ビットの範囲を超えたサンプルはクリップされます。</li>
+      <li>音量を完全に 0 にしたい場合は <kbd>無音化</kbd> を使用してください。</li>
+    </ul>
+
+    <h2>音量の最大化</h2>
+    <p>選択範囲内の最大ピークを調べ、そのピークが指定したレベルになるように選択範囲全体の音量を一律に調整します（ノーマライズ）。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_normalize.png" alt="「音量の最大化」ダイアログ" style="max-width: 420px;">
+      <figcaption>「音量の最大化」ダイアログ</figcaption>
+    </figure>
+    <ul>
+      <li><strong>指定範囲</strong>：<code>-96</code> 〜 <code>0</code> dB（初期値 <code>0</code> dB）。0 dB を指定すると 16 ビットの最大振幅に揃います。</li>
+      <li>ステレオで L / R 両方がオンのときは、L と R のうち大きい方のピークを基準に両チャンネルを同じ倍率で調整します。片方だけオンのときは、オンのチャンネルのピークだけを調べます。</li>
+      <li>選択範囲が完全に無音のときは何もせず終了します。</li>
+    </ul>
+
+    <h2>無音化</h2>
+    <p>ダイアログを表示せず、選択範囲の音量を即座に 0（無音）にします。</p>
+
+    <h2>フェードイン / フェードアウト</h2>
+    <p>選択範囲の音量を滑らかに上げ下げします。音量変化は聴感上自然な対数カーブ（dB が時間に対して直線的に変化）で行います。</p>
+    <div class="figure-row">
+      <figure class="figure">
+        <img src="../pic/cmd_fade_in.png" alt="「フェードイン」ダイアログ">
+        <figcaption>「フェードイン」ダイアログ</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="../pic/cmd_fade_out.png" alt="「フェードアウト」ダイアログ">
+        <figcaption>「フェードアウト」ダイアログ</figcaption>
+      </figure>
+    </div>
+    <ul>
+      <li><strong>フェードイン</strong>：開始位置のレベルを指定値（<code>-96</code> 〜 <code>0</code> dB、初期値 <code>-96</code> dB）、終了位置を 0 dB として徐々に音量を上げます。</li>
+      <li><strong>フェードアウト</strong>：開始位置を 0 dB、終了位置のレベルを指定値（<code>-96</code> 〜 <code>0</code> dB、初期値 <code>-96</code> dB）として徐々に音量を下げます。</li>
+    </ul>
+
+    <h2>位相反転</h2>
+    <p>ダイアログを表示せず、選択範囲内の各サンプルの符号（正負）を反転します（<code>-32768</code> は <code>32767</code> に変換されます）。</p>
+
+    <h2>逆再生</h2>
+    <p>ダイアログを表示せず、選択範囲内のサンプルの並びを時間方向に反転します（先頭と末尾を入れ替えます）。</p>
+
+    <h2>チャンネル入れ替え</h2>
+    <p>ダイアログを表示せず、選択範囲内の L チャンネルと R チャンネルのデータを入れ替えます。</p>
+    <ul>
+      <li>ステレオ音声を開いているときのみ有効です（モノラル時は無効になります）。</li>
+      <li>上部バーの <kbd>L</kbd> / <kbd>R</kbd> スイッチの状態に関わらず、常に L と R を入れ替えます。</li>
+    </ul>
+
+    <div class="note">
+      <strong>L / R スイッチとの連動：</strong>「チャンネル入れ替え」を除くすべてのコマンド（音量の変更・音量の最大化・無音化・フェードイン・フェードアウト・位相反転・逆再生）では、ステレオ音声時に <kbd>L</kbd> / <kbd>R</kbd> スイッチでオフにしたチャンネルは加工されず元のまま残ります。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_edit.html">&larr; 前へ：「編集」グループ</a>
+      <a href="index.html">目次</a>
+      <a href="group_process_all.html">次へ：「全体の加工」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 画面の横幅が 750dp 以上のとき -->
+<resources>
+    <!-- 再生・停止のボタンの幅を、倍にする -->
+    <dimen name="play_button_width">88dp</dimen>
+</resources>

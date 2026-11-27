@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- アプリが自分で描く部品の色（ダークモード） -->
+<resources>
+    <color name="scroll_track">#FF303030</color>
+    <color name="scroll_thumb">#FFB0B0B0</color>
+    <color name="scroll_thumb_disabled">#FF606060</color>
+    <color name="slider_track">#FF808080</color>
+    <color name="slider_thumb">#FFE0E0E0</color>
+    <color name="repeat_on">#FF2E7D32</color>
+    <color name="swatch_border">#FF808080</color>
+</resources>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開始位置・終了位置の操作ボタン群 - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 開始位置・終了位置の操作ボタン群</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>開始位置・終了位置の操作ボタン群</h1>
+    <p>再生ビューの下には、同じ構成の操作行が 2 行並んでいます。1 行目が<strong>開始位置</strong>、2 行目が<strong>終了位置</strong>を数値入力やボタンで正確に動かすための操作部です。</p>
+    <p>画面幅に収まらない場合は、各行を左右にスクロールして操作できます。</p>
+
+    <figure class="figure">
+      <img src="../pic/view_startend.png" alt="開始位置・終了位置の操作ボタン群の表示例" style="max-width: 720px;">
+      <figcaption>開始位置・終了位置の操作ボタン群</figcaption>
+    </figure>
+
+    <h2>1 行の構成（左から）</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>順</th>
+            <th>表示</th>
+            <th>種類</th>
+            <th>説明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>開始</strong> / <strong>終了</strong></td>
+            <td>ラベル</td>
+            <td>その行が開始位置・終了位置のどちらの操作かを示します。</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>データ位置</strong></td>
+            <td>数値入力欄</td>
+            <td>現在のバーの位置を表示します。数値を入力して確定すると、その位置へバーを移動できます。</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><kbd>秒</kbd> / <kbd>サンプル</kbd></td>
+            <td>切り替えボタン</td>
+            <td>押すたびに表示・入力の単位を「秒」と「サンプル」で切り替えます（初期値は「秒」）。開始行と終了行で別々に設定できます。</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><kbd>|&lt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>データの先頭（または相手バーの 1 サンプル右）へ動かします。</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><kbd>&lt;&lt;&lt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>1 秒左へ動かします。</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><kbd>&lt;&lt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>0.1 秒左へ動かします。</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><kbd>&lt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>1 サンプル左へ動かします。</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><kbd>&gt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>1 サンプル右へ動かします。</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><kbd>&gt;&gt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>0.1 秒右へ動かします。</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><kbd>&gt;&gt;&gt;</kbd></td>
+            <td>移動ボタン</td>
+            <td>1 秒右へ動かします。</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><kbd>&gt;|</kbd></td>
+            <td>移動ボタン</td>
+            <td>データの末尾（または相手バーの 1 サンプル左）へ動かします。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>数値の表示形式と制約</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>単位</th>
+            <th>表示形式</th>
+            <th>例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>秒</strong></td>
+            <td>整数部最大 4 桁・小数部 5 桁</td>
+            <td><code>1234.56789</code></td>
+          </tr>
+          <tr>
+            <td><strong>サンプル</strong></td>
+            <td>整数（最大 9 桁）</td>
+            <td><code>123456789</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>丸め処理</strong>：「秒」で入力した値がサンプルの境界に一致しない場合は、最も近いサンプル位置に丸められます。</li>
+      <li><strong>範囲の制限</strong>：ボタンや数値入力でデータの範囲外や相手のバーを越える位置を指定した場合、データの端、または相手のバーの 1 サンプル手前で自動的に止まります。</li>
+      <li><strong>音声全体の長さ</strong>：データ全体長（秒数・サンプル数）は、画面上部のデータファイル名の後ろに表示されます。</li>
+    </ul>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="view_play.html">&larr; 前へ：再生ビュー</a>
+      <a href="index.html">目次</a>
+      <a href="view_cmdbutton.html">次へ：コマンドボタン部 &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

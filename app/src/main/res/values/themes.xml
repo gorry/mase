@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 端末の設定（ライトモード・ダークモード）に合わせて、色が変わるテーマ。タイトルのバーは出さない -->
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- ふつうの文字（ラベルや項目名）は、プライマリの文字色で描く -->
+        <item name="android:textViewStyle">@style/AppTextView</item>
+        <!-- 画面の上下のバー（時刻や戻るボタンなど）の絵の色。ライトモードでは暗い色、ダークモードでは明るい色にする -->
+        <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
+    </style>
+
+    <!-- ふつうの文字の見た目。標準のままだと、目立たせない文字用の薄い色（無効な項目に使うような色）になるので、
+         プライマリの文字色を指定する。大きさは、標準と同じ -->
+    <style name="AppTextView" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="CommandButton" parent="@android:style/Widget.DeviceDefault.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="StepButton" parent="CommandButton">
+        <item name="android:minWidth">44dp</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+    </style>
+</resources>

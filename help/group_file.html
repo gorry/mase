@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「ファイル」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「ファイル」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「ファイル」グループ</h1>
+    <p>音声ファイルの読み込みと、編集した音声の書き出しを行うコマンド群です。アプリ起動時はこのグループが開いています。</p>
+
+    <h2>開く</h2>
+    <p>Android 標準のファイル選択画面を開き、音声ファイルを 1 つ読み込みます。</p>
+    <ul>
+      <li><strong>対応形式</strong>：<code>wav</code>・<code>mp3</code>・<code>mp4</code>（音声トラックのみ読み込みます。<code>m4a</code> も mp4 として開けます）。</li>
+      <li><strong>内部変換</strong>：入力のビット深度に関わらず 16 ビット符号付き PCM に変換して読み込みます（サンプリングレートとチャンネル数は元のまま保持します）。</li>
+      <li><strong>3 チャンネル以上のファイル</strong>：「読み込むチャンネル（2 つまで）」ダイアログが表示され、1 つ選ぶとモノラル、2 つ選ぶとステレオ（番号の小さい方を L、大きい方を R）として読み込みます。</li>
+      <li><strong>長さの上限</strong>：10,000 秒未満かつ 1,000,000,000 サンプル未満です。上限を超える場合は末尾が切り捨てられ、警告ダイアログが表示されます。</li>
+      <li><strong>未保存データがある場合</strong>：ファイル選択画面の前に確認ダイアログが表示され、<kbd>保存して開く</kbd>・<kbd>保存しないで開く</kbd>・<kbd>キャンセル</kbd> を選べます。</li>
+      <li><strong>読み込み中のキャンセル</strong>：読み込み中は「読み込んでいます…」ダイアログが表示され、<kbd>キャンセル</kbd> を押すと元の状態に戻ります。</li>
+    </ul>
+    <div class="note">
+      <strong>履歴とコピーバッファ：</strong>新しいファイルを読み込むとアンドゥ履歴は空になりますが、コピーバッファの内容は維持されるため別ファイルへ貼り付けられます。
+    </div>
+
+    <h2>保存</h2>
+    <p>音声データ全体をファイルに書き出します。</p>
+    <ul>
+      <li>すでに <kbd>名前を付けて保存</kbd> を実行している場合は、前回と同じ保存先・形式・パラメータでダイアログを出さずに上書き保存します。</li>
+      <li>まだ <kbd>名前を付けて保存</kbd> を実行していない場合（または別ファイルを開き直した後）は、<kbd>名前を付けて保存</kbd> と同じ動作になります。</li>
+    </ul>
+
+    <h2>名前を付けて保存</h2>
+    <p>出力形式とパラメータを指定するダイアログを開き、<kbd>OK</kbd> を押したあとで保存先とファイル名を選んで音声データ全体を書き出します。</p>
+    <ul>
+      <li>保存に成功すると、保存先とパラメータが記憶され、次回の <kbd>保存</kbd> で再利用されます。</li>
+      <li>データファイル名の表示は保存したファイル名になり、未保存の印（<code>* </code>）が外れます。</li>
+    </ul>
+
+    <h2>選択範囲を保存</h2>
+    <p>開始位置から終了位置までの選択範囲だけを、指定した形式・パラメータでファイルに書き出します。</p>
+    <ul>
+      <li>ファイルへ書き出すだけで、編集中の音声データ・未保存の状態・データファイル名の表示は変わりません。</li>
+      <li>保存先は記憶しません（パラメータの初期値には直近の「名前を付けて保存」の設定が使われます）。</li>
+    </ul>
+
+    <h2>書き出し形式とパラメータ</h2>
+    <p>書き出し時はサンプリングレートとチャンネル数を変換せず、現在の内部データのまま出力します。変換したい場合は事前に「<a href="group_process_all.html">全体の加工</a>」で変換してください。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>形式</th>
+            <th>設定項目</th>
+            <th>選択できる条件・備考</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>wav</strong></td>
+            <td>量子化ビット数（16 ビット / 8 ビット、初期値 16 ビット）</td>
+            <td>常に選択可能。8 ビットは 16 ビットの上位 8 ビットを使用（ディザなし）。</td>
+          </tr>
+          <tr>
+            <td><strong>mp3</strong></td>
+            <td>ビットレート（64〜320 kbps、初期値 128 kbps）</td>
+            <td>サンプリングレートが 8000 / 11025 / 12000 / 16000 / 22050 / 24000 / 32000 / 44100 / 48000 Hz のときのみ選択可能（LAME 3.100 使用・CBR）。低いサンプリングレートでは選べるビットレート上限が下がります。</td>
+          </tr>
+          <tr>
+            <td><strong>m4a</strong></td>
+            <td>ビットレート（64〜320 kbps、初期値 128 kbps）</td>
+            <td>端末の AAC-LC エンコーダーが現在のサンプリングレートとチャンネル数に対応しているときに選択可能。AAC の仕組み上、元の音声よりわずかに長くなる場合があります。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>保存後のデータ置き換え確認</h2>
+    <p><kbd>保存</kbd> または <kbd>名前を付けて保存</kbd> で、書き出すと音が変化する形式（<strong>mp3</strong>・<strong>m4a</strong>・<strong>wav の 8 ビット</strong>）で保存した場合、「保存した内容で、編集中の音声データを置き換えますか？」という確認ダイアログが表示されます。</p>
+    <ul>
+      <li><kbd>置き換える</kbd>：書き出したファイルを読み込み直した状態にします（アンドゥ履歴は空になります）。</li>
+      <li><kbd>置き換えない</kbd>：編集中の 16 ビット PCM データをそのまま保ちます。</li>
+    </ul>
+    <p>wav（16 ビット）で保存した場合や、<kbd>選択範囲を保存</kbd> を実行した場合はこの確認は表示されません。</p>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="view_cmdbutton.html">&larr; 前へ：コマンドボタン部</a>
+      <a href="index.html">目次</a>
+      <a href="group_undo.html">次へ：「アンドゥ」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

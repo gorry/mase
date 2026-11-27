@@ -1,0 +1,19 @@
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+.cxx/
+captures/
+
+# release ビルドの署名鍵（機械ごと・人ごとの秘密情報）
+keystore.properties
+*.keystore
+*.jks
+
+
+# リリースパッケージ（gradlew releasePackage が作る）
+release/
+
+# 外から取ってくるソース（LAME など。ビルドのときに、ここへ取ってくる）
+third_party/

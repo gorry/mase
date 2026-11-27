@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 編集画面（横向き）。左に波形と位置の操作、右に編集コマンドのボタン群を置く。memo/doc/spec.md の「編集画面の並び」 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- データファイル名（左にメニュー） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menu_button"
+                style="@style/StepButton"
+                android:contentDescription="@string/menu"
+                android:text="≡"
+                android:textSize="20sp" />
+
+            <!-- データファイル名と全体の長さ。編集はできない入力欄にして、長いときは横にスクロールして全体を見られるようにする -->
+            <EditText
+                android:id="@+id/file_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cursorVisible="false"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <!-- 加工するチャンネル（L・R）。どちらか、または両方がオン。仕様は memo/doc/spec.md の「チャンネルのスイッチ」 -->
+            <Button
+                android:id="@+id/channel_left"
+                style="@style/StepButton"
+                android:contentDescription="@string/channel_left"
+                android:text="L" />
+            <Button
+                android:id="@+id/channel_right"
+                style="@style/StepButton"
+                android:contentDescription="@string/channel_right"
+                android:text="R" />
+
+        </LinearLayout>
+
+        <!-- 波形ビュー（右に縦の倍率バー。左に、それと同じ幅の余白：左端のバーを指でつかめるようにする）。残りの高さを使う -->
+        <LinearLayout
+            android:id="@+id/wave_row"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <net.gorry.mase.WaveformView
+                android:id="@+id/wave"
+                android:paddingStart="@dimen/zoom_bar_width"
+                android:paddingEnd="@dimen/zoom_bar_width"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <net.gorry.mase.SliderView
+                android:id="@+id/zoom_v"
+                android:layout_width="@dimen/zoom_bar_width"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <!-- スクロールバー -->
+        <net.gorry.mase.ScrollBarView
+            android:id="@+id/scroll_bar"
+            android:layout_marginStart="@dimen/zoom_bar_width"
+            android:layout_marginEnd="@dimen/wave_end_inset"
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <!-- 再生ビュー（右端にボタン） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <net.gorry.mase.PlayView
+                android:id="@+id/play_view"
+                android:paddingStart="@dimen/zoom_bar_width"
+                android:paddingEnd="@dimen/zoom_bar_width"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/play_button"
+                android:minWidth="@dimen/play_button_width"
+                style="@style/StepButton"
+                android:contentDescription="@string/play"
+                android:text="▶" />
+
+            <Button
+                android:id="@+id/stop_button"
+                android:minWidth="@dimen/play_button_width"
+                style="@style/StepButton"
+                android:contentDescription="@string/stop"
+                android:text="■" />
+
+            <Button
+                android:id="@+id/rewind_button"
+                style="@style/StepButton"
+                android:contentDescription="@string/rewind"
+                android:text="↩" />
+
+            <ToggleButton
+                android:id="@+id/repeat_button"
+                style="@style/StepButton"
+                android:contentDescription="@string/repeat"
+                android:textOff="⟲"
+                android:textOn="⟲" />
+        </LinearLayout>
+
+        <!-- 開始位置・終了位置の操作ボタン群 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <include
+                android:id="@+id/row_start"
+                layout="@layout/row_position" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <include
+                android:id="@+id/row_end"
+                layout="@layout/row_position" />
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- 編集コマンドのボタン群。折り畳めるグループに分けて縦に並べ、全体を縦にスクロールする。ボタンはコードで並べる -->
+    <ScrollView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false">
+
+        <LinearLayout
+            android:id="@+id/command_groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>

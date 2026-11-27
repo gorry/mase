@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 縦の倍率バーの幅。波形ビュー・再生ビューの左の余白も、同じ幅にする -->
+    <dimen name="zoom_bar_width">28dp</dimen>
+    <!-- 波形の右端から、画面（横向きは左側の列）の右端まで。波形ビューの右の余白＋縦の倍率バー。
+         スクロールバーの右端を、波形の右端にそろえるのに使う -->
+    <dimen name="wave_end_inset">56dp</dimen>
+    <!-- 開始位置・終了位置の、表示の単位のボタンの幅。「サンプル」が収まる幅で固定する -->
+    <dimen name="unit_button_width">84dp</dimen>
+    <!-- 再生・停止のボタンの幅。画面の横幅が 750dp 以上のときは、倍にする（values-w750dp/dimens.xml） -->
+    <dimen name="play_button_width">44dp</dimen>
+</resources>

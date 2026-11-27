@@ -1,0 +1,53 @@
+mase (Mini Android Sound Editor)
+Copyright (C) 2026 GORRY.
+Hiroaki GOTO as GORRY
+https://github.com/gorry/mase
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file in the root of this repository for the full license text.
+
+========================================================================
+Third-Party Software Notices
+========================================================================
+
+This product uses the following third-party software:
+
+------------------------------------------------------------------------
+LAME (LAME Ain't an MP3 Encoder) 3.100
+------------------------------------------------------------------------
+Purpose:
+  MP3 audio encoding (libmp3lame)
+
+Copyright:
+  Copyright (c) 1999-2011 The LAME Project
+  Copyright (c) 1999, 2000, 2001 Mark Taylor
+  Copyright (c) 1998 Michael Cheng
+  As well as additional copyrights as documented in the LAME source code.
+
+License:
+  GNU Library General Public License (LGPL), Version 2
+  The full license text is included as COPYING in the LAME source package,
+  and is also bundled in distributed APKs (accessible from "About mase"
+  in the app).
+
+Website:
+  https://lame.sourceforge.io/
+  http://www.mp3dev.org/
+
+Source Code:
+  Release page: https://sourceforge.net/projects/lame/files/lame/3.100/
+  Archive:      lame-3.100.tar.gz
+  Download URL: https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
+  SHA-256:      ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e
+
+Integration and Modification Notice:
+  The LAME source code is not included in this repository. During the build
+  process (see app/build.gradle), the official source archive is fetched,
+  verified against the SHA-256 checksum above, and compiled unmodified
+  (encoder library libmp3lame only; the GPL-licensed mpglib decoder is not
+  built or included).
+
+  LAME is built and dynamically linked as a separate shared library
+  (libmp3lame.so) using app/src/main/cpp/CMakeLists.txt and
+  app/src/main/cpp/lame-config/config.h, allowing users to replace
+  libmp3lame.so with a compatible build in accordance with the LGPL v2.

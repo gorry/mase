@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb">目次</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="../pic/mase_icon.svg" alt="mase アプリアイコン">
+      <div class="hero-text">
+        <h1>mase (Mini Android Sound Editor)</h1>
+        <p>Android 用のシンプルなサウンドエディタです。「1 つの音声ファイルを読み込み、編集して、書き出す」ことに機能を絞って作っています。</p>
+      </div>
+    </section>
+
+    <h2>概要</h2>
+    <ul>
+      <li><strong>対応環境</strong>：Android 14（API 34）以降。ライトモード・ダークモード、縦画面・横画面の自動回転、日本語・英語表示に対応しています。</li>
+      <li><strong>読み込み形式</strong>：wav・mp3・mp4（音声トラック。m4a も mp4 として読み込み可能）。3 チャンネル以上のファイルは、読み込むチャンネルを 2 つまで選べます。</li>
+      <li><strong>内部データ形式</strong>：16 ビット符号付き PCM（モノラルまたはステレオ）。サンプリングレートは入力のまま保持します。上限は <strong>10,000 秒未満</strong> かつ <strong>1,000,000,000 サンプル未満</strong> です。</li>
+      <li><strong>書き出し形式</strong>：wav（8 ビット / 16 ビット）・mp3（LAME 使用）・m4a（AAC）。</li>
+    </ul>
+
+    <h2>目次</h2>
+
+    <div class="toc-grid">
+      <section class="toc-card">
+        <h2>画面と基本操作</h2>
+        <ul>
+          <li>
+            <a href="mainscreen.html">メイン画面</a>
+            <span class="toc-desc">画面全体の構成、メニュー、ファイル名、L / R スイッチ</span>
+          </li>
+          <li>
+            <a href="view_wave.html">波形ビュー</a>
+            <span class="toc-desc">波形・目盛り・選択範囲の表示とタッチ操作</span>
+          </li>
+          <li>
+            <a href="view_play.html">再生ビュー</a>
+            <span class="toc-desc">全体表示、シーク操作、再生・停止・巻き戻し・リピート</span>
+          </li>
+          <li>
+            <a href="view_startend.html">開始位置・終了位置の操作ボタン群</a>
+            <span class="toc-desc">数値入力、秒／サンプル切り替え、ステップ移動</span>
+          </li>
+          <li>
+            <a href="view_cmdbutton.html">コマンドボタン部</a>
+            <span class="toc-desc">折り畳みグループの使い方、バックグラウンド実行と値の記憶</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="toc-card">
+        <h2>編集コマンド（グループ別）</h2>
+        <ul>
+          <li>
+            <a href="group_file.html">「ファイル」グループ</a>
+            <span class="toc-desc">開く・保存・名前を付けて保存・選択範囲を保存</span>
+          </li>
+          <li>
+            <a href="group_undo.html">「アンドゥ」グループ</a>
+            <span class="toc-desc">元に戻す・やり直す</span>
+          </li>
+          <li>
+            <a href="group_select.html">「選択」グループ</a>
+            <span class="toc-desc">無音区間を選択・発音区間を選択</span>
+          </li>
+          <li>
+            <a href="group_edit.html">「編集」グループ</a>
+            <span class="toc-desc">トリム・カット・コピー・貼り付け・挿入・末尾に追加</span>
+          </li>
+          <li>
+            <a href="group_process_selection.html">「選択範囲の加工」グループ</a>
+            <span class="toc-desc">音量変更・最大化・無音化・フェード・位相反転・逆再生・チャンネル入れ替え</span>
+          </li>
+          <li>
+            <a href="group_process_all.html">「全体の加工」グループ</a>
+            <span class="toc-desc">音程の変更・サンプリングレート／再生レートの変更・チャンネル数の変更</span>
+          </li>
+          <li>
+            <a href="group_add_sound.html">「音の追加」グループ</a>
+            <span class="toc-desc">音のミックス・音の挿入・追加</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="toc-card">
+        <h2>設定</h2>
+        <ul>
+          <li>
+            <a href="setting.html">設定画面</a>
+            <span class="toc-desc">色の設定、無音の判定、元に戻せる最大回数</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>基本的な編集の流れ</h2>
+    <ol>
+      <li>アプリを起動し、「<a href="group_file.html">ファイル</a>」グループの <kbd>開く</kbd> から音声ファイルを選びます。</li>
+      <li><a href="view_wave.html">波形ビュー</a> や <a href="view_startend.html">開始位置・終了位置の操作ボタン群</a> で編集したい範囲を指定し、<a href="view_play.html">再生ビュー</a> で音を確認します。</li>
+      <li><a href="view_cmdbutton.html">編集コマンド</a> で切り出しや音量調整、エフェクトなどを実行します。やり直したいときは「<a href="group_undo.html">アンドゥ</a>」で元に戻せます。</li>
+      <li>編集が終わったら、「<a href="group_file.html">ファイル</a>」グループの <kbd>保存</kbd>・<kbd>名前を付けて保存</kbd>・<kbd>選択範囲を保存</kbd> で書き出します。</li>
+    </ol>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <span></span>
+      <a href="mainscreen.html">次へ：メイン画面 &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

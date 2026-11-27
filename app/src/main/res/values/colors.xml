@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- アプリが自分で描く部品の色（ライトモード）。ダークモードの色は values-night/colors.xml。
+     波形ビュー・再生ビューの中身の色は、ここではなく、色の設定（ViewColors）で決まる -->
+<resources>
+    <!-- スクロールバー -->
+    <color name="scroll_track">#FFD0D0D0</color>
+    <color name="scroll_thumb">#FF606060</color>
+    <color name="scroll_thumb_disabled">#FFB0B0B0</color>
+    <!-- 縦の倍率バー -->
+    <color name="slider_track">#FF909090</color>
+    <color name="slider_thumb">#FF505050</color>
+    <!-- リピートがオンのときの、ボタンの色 -->
+    <color name="repeat_on">#FF81C784</color>
+    <!-- 色の見本の枠 -->
+    <color name="swatch_border">#FF808080</color>
+</resources>

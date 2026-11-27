@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「音の追加」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「音の追加」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「音の追加」グループ</h1>
+    <p>無音・サイン波・矩形波・別の音声ファイルを、編集中の音声にミックスしたり、開始位置へ挿入・末尾へ追加したりするコマンド群です。コピーバッファは使用せず変更もしません。</p>
+
+    <h2>音のミックス</h2>
+    <p>現在の選択範囲（開始位置〜終了位置）に、指定した音を合成（ミックス）します。音声データの長さや選択範囲は変わりません。</p>
+    <div class="figure-row">
+      <figure class="figure">
+        <img src="../pic/cmd_mix_sound.png" alt="「音のミックス」ダイアログ（波形）">
+        <figcaption>「音のミックス」ダイアログ（波形）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="../pic/cmd_mix_sound_audiofile.png" alt="「音のミックス」ダイアログ（音声ファイル）">
+        <figcaption>「音のミックス」ダイアログ（音声ファイル）</figcaption>
+      </figure>
+    </div>
+    <ul>
+      <li><strong>元の音 — 音量</strong>：選択範囲にある元の音の音量（<code>-96</code> 〜 <code>0</code> dB、初期値 <code>0</code> dB）。</li>
+      <li><strong>ミックスする音 — 音量</strong>：混ぜる音の音量（<code>-96</code> 〜 <code>0</code> dB、初期値 <code>0</code> dB）。</li>
+      <li><strong>種類</strong>：<code>サイン波</code>（初期値）・<code>矩形波</code>・<code>音声ファイル</code> から選びます。</li>
+      <li><strong>L / R スイッチ</strong>：有効です。オフにしたチャンネルには「元の音」の音量変更もミックスも行われず、元のまま残ります。</li>
+    </ul>
+
+    <h2>音の挿入・追加</h2>
+    <p>指定した音を、開始位置へ割り込ませて挿入するか、音声データの末尾へ連結して追加します。実行後は、追加した音の範囲全体が選択範囲になります（L / R スイッチは対象外で全チャンネルに適用されます）。</p>
+    <div class="figure-row cols-3">
+      <figure class="figure">
+        <img src="../pic/cmd_insert_sound.png" alt="「音の挿入・追加」ダイアログ（波形）">
+        <figcaption>波形（サイン波・矩形波）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="../pic/cmd_insert_sound_audiofile_entire.png" alt="「音の挿入・追加」ダイアログ（音声ファイル・ファイル全体）">
+        <figcaption>音声ファイル（ファイル全体）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="../pic/cmd_insert_sound_audiofile.png" alt="「音の挿入・追加」ダイアログ（音声ファイル・長さを指定）">
+        <figcaption>音声ファイル（長さを指定）</figcaption>
+      </figure>
+    </div>
+    <ul>
+      <li><strong>種類</strong>：<code>無音</code>（初期値）・<code>サイン波</code>・<code>矩形波</code>・<code>音声ファイル</code> から選びます。</li>
+      <li><strong>音量</strong>：無音以外のときに指定します（<code>-96</code> 〜 <code>0</code> dB、初期値 <code>0</code> dB）。</li>
+      <li><strong>長さ</strong>：無音・サイン波・矩形波のときは秒数（小数可、初期値 <code>1</code> 秒）を指定します。音声ファイルのときは「<code>ファイル全体</code>」または「<code>長さを指定</code>」を選べます。</li>
+      <li><strong>実行ボタン</strong>：ダイアログ下部に <kbd>キャンセル</kbd>・<kbd>開始位置に挿入</kbd>・<kbd>末尾に追加</kbd> の 3 ボタンが並びます。</li>
+    </ul>
+
+    <h2>足す音の種類ごとの設定</h2>
+
+    <h3>無音（音の挿入・追加のみ）</h3>
+    <p>指定した長さ（秒）の無音を挿入または末尾に追加します。</p>
+
+    <h3>サイン波 / 矩形波</h3>
+    <ul>
+      <li><strong>周波数</strong>：<code>0</code> Hz 以上（上限なし、小数可、初期値 <code>1000</code> Hz）。</li>
+      <li>振幅は 0 dB で最大（32767）、範囲の先頭から位相 0 で生成されます。ステレオの場合は L と R に同じ波形を入れます。</li>
+      <li>矩形波は帯域制限を行わない理想矩形波です。</li>
+    </ul>
+
+    <h3 id="audio-file">音声ファイル</h3>
+    <ul>
+      <li><strong>ファイル選択</strong>：行の右端にある <kbd>開く</kbd> ボタンから音声ファイル（wav / mp3 / mp4）を選びます。選んだファイルの名前と音声情報が 1 行で表示され、長い場合は横にスクロールして確認できます。</li>
+      <li><strong>チャンネル数</strong>：モノラルまたはステレオのみ使用できます（3 チャンネル以上のファイルは使用できません）。編集中の音声とチャンネル数が違う場合は自動で変換されます（モノラル→ステレオは L / R 複製、ステレオ→モノラルは L / R 平均）。</li>
+      <li><strong>変換方法</strong>：選んだファイルのサンプリングレートが編集中の音声と違う場合のみ表示され、<a href="group_process_all.html#algorithm">リサンプリングのアルゴリズム</a>を選べます。</li>
+      <li><strong>繰り返し</strong>（スイッチ、初期値オフ）：「音のミックス」時、または「音の挿入・追加」で「長さを指定」を選んだときに表示されます。
+        <ul>
+          <li><strong>オン</strong>：ファイルが対象期間より短い場合、先頭から繰り返して埋めます。</li>
+          <li><strong>オフ</strong>：ファイル終了後は何も足しません（挿入時は残りが無音になります。ミックス時は「元の音」の音量調整だけが選択範囲全体にかかります）。</li>
+        </ul>
+      </li>
+      <li><strong>ファイルの記憶</strong>：実行した音声ファイルの場所（URI）はアプリ終了まで記憶され、次にダイアログを開いたときに自動で読み直します（ファイルが削除・移動されていた場合は未選択に戻ります）。</li>
+    </ul>
+
+    <div class="note">
+      <strong>長さの上限：</strong>「音の挿入・追加」で指定した長さが上限（10,000 秒または 1,000,000,000 サンプル）を超える場合は、指定可能な最大秒数を知らせるメッセージが表示されます。「ファイル全体」が入りきらない場合は、元の音声データは削らず、追加するファイルの末尾を切り捨てて警告を表示します。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_process_all.html">&larr; 前へ：「全体の加工」グループ</a>
+      <a href="index.html">目次</a>
+      <a href="setting.html">次へ：設定画面 &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

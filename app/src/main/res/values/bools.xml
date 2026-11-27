@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 画面の上下のバーの絵を、明るい背景に合わせた暗い色にするか（ライトモード） -->
+    <bool name="light_system_bars">true</bool>
+</resources>

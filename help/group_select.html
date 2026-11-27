@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「選択」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「選択」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「選択」グループ</h1>
+    <p>現在の<strong>開始位置</strong>を基準にして、前後の無音区間または発音区間を自動で選択範囲（開始位置〜終了位置）に設定するコマンド群です。</p>
+
+    <h2>無音区間を選択</h2>
+    <p>開始位置が無音区間の中にあるとき、その前後へ無音が続いている範囲を自動的に選択します。</p>
+    <p>開始位置が音のある場所にある場合は選択範囲を変更せず、「開始位置が無音区間にありません。開始位置を無音の所へ動かしてください。」と表示します。</p>
+
+    <h2>発音区間を選択</h2>
+    <p>開始位置が発音区間（音のある区間）の中にあるとき、左右それぞれで最初に無音になる位置を探し、その間を自動的に選択します（無音が見つからない側は音声データの端まで選択します）。</p>
+    <p>開始位置が無音区間にある場合は選択範囲を変更せず、「開始位置が発音区間にありません。開始位置を音のある所へ動かしてください。」と表示します。</p>
+
+    <h2>無音判定の仕組み</h2>
+    <ul>
+      <li><strong>無音の定義</strong>：指定された「判定する期間の長さ（初期値 10 ミリ秒）」の中で、波形の最大値と最小値の差（振幅）が「無音の音量（初期値 -54 dB）」以下である状態を無音とみなします。</li>
+      <li><strong>判定基準の変更</strong>：期間の長さ（1〜1000 ミリ秒）と無音の音量（-96〜0 dB、小・中・大プリセットあり）は、<a href="setting.html">設定画面</a>の「無音の判定」で調整できます。</li>
+      <li><strong>L / R スイッチとの連動</strong>：ステレオ音声では、両方オンのときは L と R の両方が無音条件を満たす区間を無音とします。<kbd>L</kbd> または <kbd>R</kbd> の片方だけオンにすると、オンのチャンネルだけを見て判定します。</li>
+      <li><strong>境界位置の選び方</strong>：選択範囲の両端は、クリックノイズが出にくいよう無音期間の中で最も 0（ゼロクロス）に近く変化の少ない位置が自動で選ばれます。</li>
+      <li><strong>データへの影響</strong>：選択範囲を動かすだけで音声データは変更しないため、未保存状態にはならず、アンドゥ履歴にも記録されません。</li>
+    </ul>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_undo.html">&larr; 前へ：「アンドゥ」グループ</a>
+      <a href="index.html">目次</a>
+      <a href="group_edit.html">次へ：「編集」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

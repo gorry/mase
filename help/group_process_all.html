@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「全体の加工」グループ - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 「全体の加工」グループ</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>「全体の加工」グループ</h1>
+    <p>選択範囲に関係なく、<strong>音声データ全体</strong>に対して音程・サンプリングレート・再生レート・チャンネル数を変換するコマンド群です。</p>
+
+    <h2>機能比較</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>コマンド</th>
+            <th>音程</th>
+            <th>サンプリングレート</th>
+            <th>サンプルデータ</th>
+            <th>L / R スイッチ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>音程の変更</strong></td>
+            <td>変わる</td>
+            <td>変わらない</td>
+            <td>変わる</td>
+            <td>「再生時間を維持する」オン時のみ有効</td>
+          </tr>
+          <tr>
+            <td><strong>サンプリングレートの変更</strong></td>
+            <td>変わらない</td>
+            <td>変わる</td>
+            <td>変わる</td>
+            <td>対象外（常に全チャンネル）</td>
+          </tr>
+          <tr>
+            <td><strong>再生レートの変更</strong></td>
+            <td>変わる</td>
+            <td>変わる</td>
+            <td>変わらない</td>
+            <td>対象外（常に全チャンネル）</td>
+          </tr>
+          <tr>
+            <td><strong>チャンネル数の変更</strong></td>
+            <td>変わらない</td>
+            <td>変わらない</td>
+            <td>変わる</td>
+            <td>対象外（常に全チャンネル）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="pitch">音程の変更</h2>
+    <p>音声全体の音程（ピッチ）を半音単位で変更します。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_pitch.png" alt="「音程の変更」ダイアログ" style="max-width: 420px;">
+      <figcaption>「音程の変更」ダイアログ</figcaption>
+    </figure>
+    <ul>
+      <li><strong>音程差</strong>：<code>-24</code> 〜 <code>+24</code> 半音（初期値 <code>0</code>、小数入力可。1 で半音、12 で 1 オクターブ）。</li>
+      <li><strong>変換方法</strong>：リサンプリングに使用するアルゴリズムを選択します（<a href="#algorithm">変換方法（サンプリングレート変換アルゴリズム）</a>を参照）。</li>
+      <li><strong>再生時間を維持する</strong>（スイッチ、初期値オフ）：
+        <ul>
+          <li><strong>オフ</strong>：タイムストレッチを行わないため、音程を上げると再生時間が短く、下げると長くなります（-24 で 4 倍、+24 で 1/4）。</li>
+          <li><strong>オン</strong>：WSOLA 方式のタイムストレッチとリサンプリングを組み合わせ、再生時間を保ったまま音程を変更します（ステレオ時は L / R スイッチで片チャンネルのみ加工できます）。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2 id="resample">サンプリングレートの変更</h2>
+    <p>音程と再生時間を維持したまま、音声データのサンプリングレート（Hz）を変換します。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_resample.png" alt="「サンプリングレートの変更」ダイアログ" style="max-width: 420px;">
+      <figcaption>「サンプリングレートの変更」ダイアログ</figcaption>
+    </figure>
+    <ul>
+      <li>ダイアログには「現在のサンプリングレート」が表示され、「変更後」のドロップダウンから端末のハードウェアが再生対応しているレート（4000〜192000 Hz など）を選べます。</li>
+      <li>「<a href="#algorithm">変換方法</a>」で補間アルゴリズムを選択します。</li>
+      <li>MP3 で書き出したいのに現在のサンプリングレートが非対応の場合や、端末で再生できないサンプリングレートだった場合の変換にも使えます。</li>
+    </ul>
+
+    <h2>再生レートの変更</h2>
+    <p>サンプルデータ自体は一切書き換えず、サンプリングレートの設定値だけを変更します。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_play_rate.png" alt="「再生レートの変更」ダイアログ" style="max-width: 420px;">
+      <figcaption>「再生レートの変更」ダイアログ</figcaption>
+    </figure>
+    <ul>
+      <li>レートを上げると音程が高く再生時間が短くなり、下げると音程が低く再生時間が長くなります。</li>
+      <li>リサンプリングを行わないため、処理は一瞬で完了します。</li>
+    </ul>
+
+    <h2>チャンネル数の変更</h2>
+    <p>モノラルとステレオを相互に変換します。</p>
+    <figure class="figure">
+      <img src="../pic/cmd_channels.png" alt="「チャンネル数の変更」ダイアログ（ステレオからモノラル）" style="max-width: 420px;">
+      <figcaption>「チャンネル数の変更」ダイアログ（ステレオ → モノラル）</figcaption>
+    </figure>
+    <ul>
+      <li><strong>モノラル → ステレオ</strong>：ダイアログを出さず即座に実行し、L と R に同じ波形を複製します。</li>
+      <li><strong>ステレオ → モノラル</strong>：変換方法を選ぶダイアログが表示されます。
+        <ul>
+          <li><strong>L のみ</strong>：L チャンネルだけを残します。</li>
+          <li><strong>R のみ</strong>：R チャンネルだけを残します。</li>
+          <li><strong>LR 合成</strong>（初期値）：L と R を足して 2 で割ります。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2 id="algorithm">変換方法（サンプリングレート変換アルゴリズム）</h2>
+    <p>「<a href="#pitch">音程の変更</a>」「<a href="#resample">サンプリングレートの変更</a>」「<a href="group_add_sound.html#audio-file">音の追加</a>」で共通して選択できる 5 種類のアルゴリズムです。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>アルゴリズム</th>
+            <th>品質</th>
+            <th>速度</th>
+            <th>特徴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>最近傍</strong></td>
+            <td>低い</td>
+            <td>最速</td>
+            <td>最も近いサンプル値をそのまま使用します。</td>
+          </tr>
+          <tr>
+            <td><strong>線形補間</strong></td>
+            <td>やや低い</td>
+            <td>速い</td>
+            <td>隣り合う 2 サンプルを直線で結びます。</td>
+          </tr>
+          <tr>
+            <td><strong>3 次補間（Catmull-Rom）</strong></td>
+            <td>中</td>
+            <td>やや速い</td>
+            <td>前後 4 サンプルから曲線補間します。</td>
+          </tr>
+          <tr>
+            <td><strong>窓関数付き sinc（標準）</strong></td>
+            <td>高い</td>
+            <td>遅い</td>
+            <td>初期選択。カイザー窓（32 タップ）の sinc 補間で折り返し雑音を抑えます。</td>
+          </tr>
+          <tr>
+            <td><strong>窓関数付き sinc（高品質）</strong></td>
+            <td>最高</td>
+            <td>最も遅い</td>
+            <td>カイザー窓（128 タップ）でさらに高精度に補間します。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>長さの上限と選択範囲：</strong>変換後の長さが上限を超える場合は、ダイアログ内にあらかじめ警告が表示されます。そのまま実行すると上限を超えた末尾が切り捨てられます。また、サンプル数が変わる変換では、開始位置・終了位置も音声の同じ箇所を指すように比率で調整されます。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="group_process_selection.html">&larr; 前へ：「選択範囲の加工」グループ</a>
+      <a href="index.html">目次</a>
+      <a href="group_add_sound.html">次へ：「音の追加」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

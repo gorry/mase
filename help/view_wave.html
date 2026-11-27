@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>波形ビュー - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 波形ビュー</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>波形ビュー</h1>
+    <p>波形ビューは、読み込んだ音声の波形を拡大・スクロールしながら確認し、編集や再生の対象となる「選択範囲（開始位置〜終了位置）」を操作する領域です。</p>
+
+    <figure class="figure">
+      <img src="../pic/view_wave.png" alt="波形ビューの表示例" style="max-width: 720px;">
+      <figcaption>波形ビュー（右に縦の倍率バー、下に横スクロールバー）</figcaption>
+    </figure>
+
+    <h2>表示内容</h2>
+    <p>波形ビューの右側には<strong>縦の倍率バー</strong>、下側には<strong>横スクロールバー</strong>があります。左右には端のバーをつかみやすくするための余白が設けられています。</p>
+
+    <h3>波形と背景の配色（初期値）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>表示要素</th>
+            <th>初期の色</th>
+            <th>説明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>背景（選択範囲外）</td>
+            <td><span class="swatch" style="background:#000000;"></span>黒</td>
+            <td>選択されていない区間</td>
+          </tr>
+          <tr>
+            <td>選択範囲の背景</td>
+            <td><span class="swatch" style="background:#404040;"></span>グレー</td>
+            <td>開始位置と終了位置のバーの間</td>
+          </tr>
+          <tr>
+            <td>モノラル波形</td>
+            <td><span class="swatch" style="background:#cccccc;"></span>やや輝度を下げた白</td>
+            <td>モノラル音声の波形</td>
+          </tr>
+          <tr>
+            <td>ステレオ（L のみ）</td>
+            <td><span class="swatch" style="background:#00d800;"></span>緑</td>
+            <td>L チャンネルだけが振れている部分</td>
+          </tr>
+          <tr>
+            <td>ステレオ（R のみ）</td>
+            <td><span class="swatch" style="background:#ff2020;"></span>赤</td>
+            <td>R チャンネルだけが振れている部分</td>
+          </tr>
+          <tr>
+            <td>ステレオ（L と R の重なり）</td>
+            <td><span class="swatch" style="background:#cccccc;"></span>やや輝度を下げた白</td>
+            <td>L と R の波形が重なっている部分</td>
+          </tr>
+          <tr>
+            <td>開始位置・終了位置・再生位置</td>
+            <td><span class="swatch" style="background:#ffffff;"></span>白（最大輝度）</td>
+            <td>開始位置は右向き三角（▶）、終了位置は左向き三角（◀）付き。再生位置は縦線のみ</td>
+          </tr>
+          <tr>
+            <td>目盛りの線・時刻</td>
+            <td><span class="swatch" style="background:#7fffff;"></span>半透明の水色（3 段階）</td>
+            <td>中央の 0 レベル水平線と時刻の垂直線（細かい単位ほど薄く表示）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>すべての色は<a href="setting.html">設定画面</a>の「色の設定」で変更できます。ステレオ音声で上部バーの <kbd>L</kbd> / <kbd>R</kbd> スイッチを片方だけオンにすると、オンのチャンネルの波形だけが表示されます。</p>
+
+    <h3>目盛りの見方</h3>
+    <ul>
+      <li>ビューの上下中央に、振幅 0 を示す水平線が引かれます。</li>
+      <li>時刻の垂直線は 1 時間・10 分・1 分・10 秒・1 秒・0.1 秒・0.01 秒…の単位で、線の間隔が 25dp 以上になる細かさまで自動表示されます。</li>
+      <li>時刻の文字は線の右下側に表示されます。最も細かい単位の線には原則表示されませんが、波形ビュー中央に最も近い線には必ず表示されます。</li>
+    </ul>
+
+    <h2>タッチ操作一覧</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>操作</th>
+            <th>動き</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>縦の倍率バーをドラッグ</strong></td>
+            <td>縦の拡大率を 1 倍〜256 倍（下が 1 倍、上が 256 倍）に変更します。中央は常に 0 レベルに保たれます。</td>
+          </tr>
+          <tr>
+            <td><strong>指 2 本のピンチイン／アウト</strong></td>
+            <td>横の倍率（時間軸）を拡大・縮小します（最小：全体表示、最大：1 サンプル = 16px）。指の中点の位置を基準に拡縮します。</td>
+          </tr>
+          <tr>
+            <td><strong>指 2 本のスライド</strong></td>
+            <td>表示位置を左右にスクロールします。ピンチと同時に行えます。</td>
+          </tr>
+          <tr>
+            <td><strong>横スクロールバーをドラッグ</strong></td>
+            <td>波形ビューの下にあるバーで左右にスクロールします。</td>
+          </tr>
+          <tr>
+            <td><strong>ダブルタップ</strong></td>
+            <td>現在の選択範囲（開始位置〜終了位置）が波形ビューの横幅いっぱいに収まるように横倍率とスクロールを合わせます。</td>
+          </tr>
+          <tr>
+            <td><strong>ダブルタップ＆横スライド</strong></td>
+            <td>2 回目のタップで指を離さず左右に動かすと、触れた位置を中心に横の倍率を変更できます（右で拡大、左で縮小）。</td>
+          </tr>
+          <tr>
+            <td><strong>開始／終了バーをドラッグ</strong></td>
+            <td>開始位置または終了位置のバーを左右に動かします。左右の余白を触っても端のバーをつかめます。</td>
+          </tr>
+          <tr>
+            <td><strong>指 1 本の縦スワイプ（上から下）</strong></td>
+            <td>バーのない場所から下へスワイプ（48dp 以上）して離すと、離した横位置へ<strong>開始位置</strong>を移動します。</td>
+          </tr>
+          <tr>
+            <td><strong>指 1 本の縦スワイプ（下から上）</strong></td>
+            <td>バーのない場所から上へスワイプ（48dp 以上）して離すと、離した横位置へ<strong>終了位置</strong>を移動します。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>縦スワイプのプレビュー：</strong>縦に 48dp 以上動かすと、指を離したときに移動する位置へバーと選択範囲の背景がリアルタイムに追従表示されます。開始位置が終了位置より右になるような無効な位置に指がある場合や、元の高さ付近に戻した場合は元の位置に戻り、離しても位置は変わりません。
+    </div>
+
+    <h2>選択範囲の決まり</h2>
+    <ul>
+      <li>音声を読み込んだ直後は、横倍率は全体表示、縦倍率は 1 倍、開始位置は先頭、終了位置は末尾になります。</li>
+      <li>開始位置は常に終了位置より左にあり、互いのバーを追い越すことはできません（最小幅は 1 サンプル分）。</li>
+      <li>拡大・スクロールによってバーが表示範囲外に出ても、選択範囲の位置は保持されます。</li>
+      <li>バーのない場所での指 1 本の横ドラッグでは何も起きません（誤操作防止）。</li>
+    </ul>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="mainscreen.html">&larr; 前へ：メイン画面</a>
+      <a href="index.html">目次</a>
+      <a href="view_play.html">次へ：再生ビュー &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

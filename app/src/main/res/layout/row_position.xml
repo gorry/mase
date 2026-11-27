@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 開始位置・終了位置の操作の 1 行。並びは memo/doc/spec.md の「開始位置・終了位置の操作ボタン群」 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- 「開始」「終了」。文字はコードで入れる -->
+    <TextView
+        android:id="@+id/pos_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/pos_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:gravity="end"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:textSize="14sp" />
+
+    <!-- 表示の単位。押すごとに「秒」「サンプル」が切り替わる。幅は、文字が変わっても変わらない -->
+    <Button
+        android:id="@+id/pos_unit"
+        style="@style/StepButton"
+        android:layout_width="@dimen/unit_button_width"
+        android:text="@string/unit_seconds" />
+
+    <Button
+        android:id="@+id/pos_head"
+        style="@style/StepButton"
+        android:text="|&lt;" />
+
+    <Button
+        android:id="@+id/pos_back_1s"
+        style="@style/StepButton"
+        android:text="&lt;&lt;&lt;" />
+
+    <Button
+        android:id="@+id/pos_back_01s"
+        style="@style/StepButton"
+        android:text="&lt;&lt;" />
+
+    <Button
+        android:id="@+id/pos_back_1"
+        style="@style/StepButton"
+        android:text="&lt;" />
+
+    <Button
+        android:id="@+id/pos_fwd_1"
+        style="@style/StepButton"
+        android:text="&gt;" />
+
+    <Button
+        android:id="@+id/pos_fwd_01s"
+        style="@style/StepButton"
+        android:text="&gt;&gt;" />
+
+    <Button
+        android:id="@+id/pos_fwd_1s"
+        style="@style/StepButton"
+        android:text="&gt;&gt;&gt;" />
+
+    <Button
+        android:id="@+id/pos_tail"
+        style="@style/StepButton"
+        android:text="&gt;|" />
+</LinearLayout>

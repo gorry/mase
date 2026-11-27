@@ -1,0 +1,272 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Profile.ini（リポジトリ直下）を読む。読むだけで、書き換えない。
+// 仕組みは memo/doc/spec.md の「アプリ名・バージョン（Profile.ini）」。
+def readProfile = { File file ->
+    def values = [:]
+    def section = ''
+    file.eachLine('UTF-8') { raw ->
+        def line = raw.replace('﻿', '').trim()
+        if (line.isEmpty() || line.startsWith(';') || line.startsWith('#')) {
+            return
+        }
+        def m = line =~ /^\[(.+)\]$/
+        if (m.matches()) {
+            section = m.group(1).trim()
+            return
+        }
+        int eq = line.indexOf('=')
+        if (eq > 0) {
+            values["${section}.${line.substring(0, eq).trim()}".toString()] = line.substring(eq + 1).trim()
+        }
+    }
+    return values
+}
+
+def profile = readProfile(rootProject.file('Profile.ini'))
+['Title.Text', 'Title.ShortText', 'Version.Text', 'Version.Number', 'Copyright.Text', 'AppId.Namespace', 'AppId.Android'].each { key ->
+    if (!profile[key]) {
+        throw new GradleException("Profile.ini に [${key.replace('.', '] ')} がありません。")
+    }
+}
+
+// Java のパッケージ名は、ソースコードに書いてある。Profile.ini の [AppId] Namespace と同じでなければならない。
+// 違うときは、ビルドを止める（Profile.ini か、ソースコードのパッケージ名の、どちらかを直す必要がある）
+def javaNamespace = 'net.gorry.mase'
+if (profile['AppId.Namespace'] != javaNamespace) {
+    throw new GradleException("Profile.ini の [AppId] Namespace（${profile['AppId.Namespace']}）が、" +
+            "ソースコードのパッケージ名（${javaNamespace}）と違います。")
+}
+
+// Java の文字列リテラルにする
+def javaString = { String s ->
+    '"' + (s ?: '').replace('\\', '\\\\').replace('"', '\\"') + '"'
+}
+
+// アプリの情報で表示するライセンスの全文を、APK に入れる（assets/licenses/）。
+// 元のファイル（リポジトリ直下の LICENSE、LAME の COPYING）を、ビルドのときに写す。写しをリポジトリには置かない
+def licenseAssets = layout.buildDirectory.dir('generated/licenseAssets')
+
+// LAME（mp3 の書き出しに使う。LGPL）のソースは、リポジトリに入れない。
+// ビルドのときに、配布元のソースパッケージを取ってきて、リポジトリ直下の third_party/ に置く（.gitignore で外してある）。
+//   third_party/lame-3.100.tar.gz … ソースパッケージ。なければ、配布元からダウンロードする。
+//                                    ネットワークがないときは、同じファイルを、手でここに置いておけばよい
+//   third_party/lame-3.100/        … 上のパッケージから、要る部分だけを取り出したもの
+// パッケージは、SHA-256 で確かめる。違うときは、ビルドを止める。
+// 置き場所を build/ の外にしてあるので、clean では消えない（リリースパッケージを作るたびに、取り直さずに済む）
+def lameVersion = '3.100'
+def lameUrl = "https://downloads.sourceforge.net/project/lame/lame/${lameVersion}/lame-${lameVersion}.tar.gz"
+def lameSha256 = 'ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e'
+def thirdPartyDir = rootProject.file('third_party')
+def lameTarball = new File(thirdPartyDir, "lame-${lameVersion}.tar.gz")
+def lameDir = new File(thirdPartyDir, "lame-${lameVersion}")
+def lameMarker = new File(lameDir, '.extracted')
+
+def sha256Of = { File f ->
+    def digest = java.security.MessageDigest.getInstance('SHA-256')
+    f.withInputStream { stream ->
+        byte[] buffer = new byte[1 << 16]
+        int n
+        while ((n = stream.read(buffer)) > 0) {
+            digest.update(buffer, 0, n)
+        }
+    }
+    digest.digest().collect { String.format('%02x', it) }.join()
+}
+
+def fetchLame = tasks.register('fetchLame') {
+    group = 'build setup'
+    description = 'LAME のソースパッケージを取ってきて、third_party/ に取り出す'
+    outputs.file(lameMarker)
+    outputs.upToDateWhen { lameMarker.exists() && lameMarker.text.trim() == lameSha256 }
+    doLast {
+        thirdPartyDir.mkdirs()
+        if (!lameTarball.exists()) {
+            logger.lifecycle("LAME ${lameVersion} のソースパッケージをダウンロードします: ${lameUrl}")
+            def part = new File(thirdPartyDir, "${lameTarball.name}.part")
+            try {
+                ant.get(src: lameUrl, dest: part, quiet: true)
+            } catch (Exception e) {
+                part.delete()
+                throw new GradleException("LAME のソースパッケージをダウンロードできませんでした。${lameUrl} から " +
+                        "lame-${lameVersion}.tar.gz を取ってきて、third_party/ に置いてください。", e)
+            }
+            part.renameTo(lameTarball)
+        }
+        def actual = sha256Of(lameTarball)
+        if (actual != lameSha256) {
+            throw new GradleException("third_party/${lameTarball.name} の内容が、決まったもの（LAME ${lameVersion} の配布物）と違います。" +
+                    "SHA-256 は ${actual}、正しくは ${lameSha256}。ファイルを消して、やり直してください。")
+        }
+        // 要る部分だけを取り出す（ライブラリのソース、公開ヘッダー、ライセンスなど）
+        project.delete(lameDir)
+        project.copy {
+            from(project.tarTree(project.resources.gzip(lameTarball)))
+            include "lame-${lameVersion}/libmp3lame/*.c", "lame-${lameVersion}/libmp3lame/*.h",
+                    "lame-${lameVersion}/libmp3lame/vector/*.c", "lame-${lameVersion}/libmp3lame/vector/*.h",
+                    "lame-${lameVersion}/include/lame.h",
+                    "lame-${lameVersion}/COPYING", "lame-${lameVersion}/LICENSE", "lame-${lameVersion}/README"
+            into thirdPartyDir
+            includeEmptyDirs = false
+        }
+        lameMarker.text = lameSha256 + '\n'
+    }
+}
+
+def copyLicenses = tasks.register('copyLicenses', Copy) {
+    dependsOn fetchLame
+    from(rootProject.file('LICENSE')) {
+        rename { 'LICENSE.txt' }
+    }
+    from(new File(lameDir, 'COPYING')) {
+        rename { 'LAME-COPYING.txt' }
+    }
+    into licenseAssets.map { it.dir('licenses') }
+}
+
+// リリース用の署名の設定。鍵と設定は keystore/ にあり、リポジトリには入れない（.gitignore）。
+// keystore/keystore.properties の項目：storeFile（keystore/ からの鍵のファイルの名前）、storePassword、keyAlias、
+// keyPassword（なければ、storePassword と同じとみなす）。
+// このファイルがないときは、リリース用の APK は、署名なしでできる
+def keystoreProps = new Properties()
+def keystorePropsFile = rootProject.file('keystore/keystore.properties')
+def hasKeystore = keystorePropsFile.exists()
+if (hasKeystore) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+    ['storeFile', 'storePassword', 'keyAlias'].each { key ->
+        if (!keystoreProps.getProperty(key)) {
+            throw new GradleException("keystore/keystore.properties に ${key} がありません。")
+        }
+    }
+    if (!rootProject.file("keystore/${keystoreProps.getProperty('storeFile')}").exists()) {
+        throw new GradleException("鍵のファイル keystore/${keystoreProps.getProperty('storeFile')} がありません。" +
+                'keystore/keystore.properties の storeFile を確かめてください。')
+    }
+}
+
+tasks.named('preBuild') {
+    dependsOn fetchLame, copyLicenses
+}
+// C のコードのビルド（CMake）も、LAME のソースを取り出した後に動かす
+tasks.configureEach { task ->
+    if (task.name.startsWith('configureCMake') || task.name.startsWith('buildCMake')) {
+        task.dependsOn fetchLame
+    }
+}
+
+android {
+    // Java のパッケージ名。ソースコード（app/src/main/java/net/gorry/mase/）に書いてあるものと同じ
+    namespace javaNamespace
+
+    sourceSets {
+        main {
+            assets.srcDir(licenseAssets)
+        }
+    }
+    compileSdk 36
+
+    defaultConfig {
+        // Android のアプリ ID は、[AppId] Android を、書いてあるとおりに使う
+        applicationId profile['AppId.Android']
+        minSdk 34
+        targetSdk 35
+        versionCode profile['Version.Number'].toInteger()
+        versionName profile['Version.Text']
+
+        resValue 'string', 'app_name', profile['Title.ShortText']
+        buildConfigField 'String', 'PROFILE_TITLE', javaString(profile['Title.Text'])
+        buildConfigField 'String', 'PROFILE_SHORT_TITLE', javaString(profile['Title.ShortText'])
+        buildConfigField 'String', 'PROFILE_VERSION', javaString(profile['Version.Text'])
+        buildConfigField 'int', 'PROFILE_VERSION_NUMBER', profile['Version.Number']
+        buildConfigField 'String', 'PROFILE_COPYRIGHT', javaString(profile['Copyright.Text'])
+        buildConfigField 'String', 'PROFILE_AUTHOR', javaString(profile['Copyright.Name'])
+        buildConfigField 'String', 'PROFILE_PROJECT_URL', javaString(profile['URL.Project'])
+        buildConfigField 'String', 'PROFILE_RELEASE_URL', javaString(profile['URL.Release'])
+        buildConfigField 'String', 'PROFILE_NOTICE_URL', javaString(profile['URL.Notice'])
+    }
+
+    // mp3 の書き出しに使う LAME と、その橋渡し（app/src/main/cpp）
+    ndkVersion '29.0.14033849'
+    defaultConfig {
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64'
+        }
+        externalNativeBuild {
+            cmake {
+                // LAME のソースの場所（fetchLame が取り出した所）を、CMake に渡す
+                arguments "-DLAME_DIR=${lameDir.absolutePath.replace('\\', '/')}"
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+            version '3.22.1'
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            if (hasKeystore) {
+                storeFile rootProject.file("keystore/${keystoreProps.getProperty('storeFile')}")
+                storePassword keystoreProps.getProperty('storePassword')
+                keyAlias keystoreProps.getProperty('keyAlias')
+                keyPassword keystoreProps.getProperty('keyPassword') ?: keystoreProps.getProperty('storePassword')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // デバッグ用は、Profile.ini の [AppId] DebugSuffix を、アプリ ID とアプリの表示名に付ける。
+            // リリース用とは別のアプリになるので、同じ端末に、両方を入れておける。
+            // DebugSuffix がないとき・空のときは、何も付けない
+            def debugSuffix = (profile['AppId.DebugSuffix'] ?: '').trim()
+            if (debugSuffix) {
+                applicationIdSuffix ".${debugSuffix}"
+                resValue 'string', 'app_name', "${profile['Title.ShortText']} ${debugSuffix}"
+            }
+        }
+        release {
+            minifyEnabled false
+            if (hasKeystore) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
+// リリースパッケージを作る：gradlew releasePackage
+// 必ず、前のビルドの結果を消してから（clean）、リリース用を新しく全部ビルドし直し、
+// できた APK を、リポジトリ直下の release/ に「[アプリ名]_android_[バージョン].apk」の名前で置く。
+// アプリ名は Profile.ini の [Title] ShortText、バージョンは [Version] Text
+tasks.register('releasePackage', Copy) {
+    group = 'build'
+    description = 'リリース用を新しくフルビルドして、release/ にリリースパッケージ（APK）を置く'
+    dependsOn 'clean', 'assembleRelease'
+    from(layout.buildDirectory.file('outputs/apk/release/app-release.apk'))
+    into rootProject.file('release')
+    rename { "${profile['Title.ShortText']}_android_${profile['Version.Text']}.apk" }
+    doFirst {
+        if (!hasKeystore) {
+            throw new GradleException('keystore/keystore.properties がないので、署名したリリースパッケージを作れません。')
+        }
+    }
+}
+// clean は、必ずビルドより先に実行する（releasePackage で、消してからビルドする順にするため）
+tasks.configureEach { task ->
+    if (task.name != 'clean' && !task.name.toLowerCase().contains('clean')) {
+        task.mustRunAfter('clean')
+    }
+}

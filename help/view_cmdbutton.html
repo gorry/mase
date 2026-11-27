@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コマンドボタン部 - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; コマンドボタン部</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>コマンドボタン部</h1>
+    <p>コマンドボタン部には、音声ファイルの読み書きや各種編集コマンドを実行するためのボタンが、折り畳みできる <strong>7 つのグループ</strong> に分かれて縦に並んでいます。</p>
+
+    <figure class="figure">
+      <img src="../pic/view_cmdbutton.png" alt="コマンドボタン部の表示例" style="max-width: 260px;">
+      <figcaption>コマンドボタン部の表示例</figcaption>
+    </figure>
+
+    <h2>グループの開閉</h2>
+    <ul>
+      <li>各グループの見出しボタンを押すと、そのグループが開閉します（開いているときは <code>▼</code>、畳んでいるときは <code>▶</code> が付きます）。</li>
+      <li>アプリ起動時は「<strong>ファイル</strong>」グループだけが開いており、他のグループは畳まれています。</li>
+      <li>開閉状態は画面の向きを変えても維持されます（アプリ終了時やライト／ダークモード切り替え時は初期状態に戻ります）。</li>
+      <li>一覧が画面に収まらないときは縦にスクロールできます。見切れに気づきやすいよう、スクロールバーは常に表示されます。</li>
+    </ul>
+
+    <h2>グループ一覧</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>グループ</th>
+            <th>含まれるコマンド</th>
+            <th>詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ファイル</strong></td>
+            <td>開く / 保存 / 名前を付けて保存 / 選択範囲を保存</td>
+            <td><a href="group_file.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>アンドゥ</strong></td>
+            <td>元に戻す / やり直す</td>
+            <td><a href="group_undo.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>選択</strong></td>
+            <td>無音区間を選択 / 発音区間を選択</td>
+            <td><a href="group_select.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>編集</strong></td>
+            <td>トリム / カット / コピー / 貼り付け / 挿入 / 末尾に追加</td>
+            <td><a href="group_edit.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>選択範囲の加工</strong></td>
+            <td>音量の変更 / 音量の最大化 / 無音化 / フェードイン / フェードアウト / 位相反転 / 逆再生 / チャンネル入れ替え</td>
+            <td><a href="group_process_selection.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>全体の加工</strong></td>
+            <td>音程の変更 / サンプリングレートの変更 / 再生レートの変更 / チャンネル数の変更</td>
+            <td><a href="group_process_all.html">詳細を見る</a></td>
+          </tr>
+          <tr>
+            <td><strong>音の追加</strong></td>
+            <td>音のミックス / 音の挿入・追加</td>
+            <td><a href="group_add_sound.html">詳細を見る</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>コマンド実行時の共通仕様</h2>
+
+    <h3>ボタンの有効・無効</h3>
+    <ul>
+      <li>音声データを開いていないときは、「ファイル」グループの <kbd>開く</kbd> と各グループの見出しボタンだけが使えます。</li>
+      <li>履歴がないときの <kbd>元に戻す</kbd>・<kbd>やり直す</kbd>、コピーバッファが空のときの <kbd>貼り付け</kbd>・<kbd>挿入</kbd>・<kbd>末尾に追加</kbd>、モノラル音声編集中の <kbd>チャンネル入れ替え</kbd> などは自動的に無効（グレー表示）になります。</li>
+    </ul>
+
+    <h3>バックグラウンド処理とキャンセル</h3>
+    <ul>
+      <li>編集コマンドを押すと、再生中の場合は自動的に停止します。</li>
+      <li>編集処理はバックグラウンドで実行され、実行中は画面操作を受け付けません。</li>
+      <li>処理に 2 秒以上かかる場合は「処理しています…」ダイアログに進捗バーと %、および <kbd>キャンセル</kbd> ボタンが表示されます。<kbd>キャンセル</kbd> を押すと、音声データ・履歴・コピーバッファを変更せずに中止できます。</li>
+    </ul>
+
+    <h3>ダイアログの前回値の記憶</h3>
+    <ul>
+      <li>パラメータを指定するダイアログでは、前回実行したときの値がアプリ終了まで記憶され、次回開いたときの初期値になります（<kbd>キャンセル</kbd> で閉じた場合は記憶しません）。</li>
+      <li>「変換方法（サンプリングレート変換アルゴリズム）」は、音程の変更・サンプリングレートの変更・音のミックス・音の挿入・追加の間で共通して記憶されます。</li>
+      <li>音量（dB）や音程差（半音）の入力欄は小数も入力できます。その下のスライダーは 1 刻みの整数で調整でき、入力欄と連動します。</li>
+    </ul>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="view_startend.html">&larr; 前へ：開始位置・終了位置の操作ボタン群</a>
+      <a href="index.html">目次</a>
+      <a href="group_file.html">次へ：「ファイル」グループ &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>再生ビュー - mase 操作マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="../pic/mase_icon.svg" alt="mase アイコン">
+        <span>mase 操作マニュアル</span>
+      </a>
+      <span class="breadcrumb"><a href="index.html">目次</a> &gt; 再生ビュー</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>再生ビュー</h1>
+    <p>再生ビューは波形ビューの下に配置され、音声データ全体の俯瞰表示と、再生・停止・シークなどの再生操作を行います。</p>
+
+    <figure class="figure">
+      <img src="../pic/view_play.png" alt="再生ビューの表示例" style="max-width: 720px;">
+      <figcaption>再生ビューと再生ボタン群</figcaption>
+    </figure>
+
+    <h2>表示内容</h2>
+    <ul>
+      <li><strong>常に全体を表示</strong>：波形ビューを拡大・スクロールしていても、再生ビューは常に音声データの先頭から末尾まで全体を表示します。</li>
+      <li><strong>共通の配色</strong>：背景、選択範囲の背景、波形、開始位置・終了位置・再生位置の色は波形ビューと同じです（目盛り線は描きません）。</li>
+      <li><strong>ステレオ表示</strong>：上部バーの <kbd>L</kbd> / <kbd>R</kbd> スイッチの状態に関わらず、L と R を重ねて表示します。</li>
+    </ul>
+
+    <h2>再生ボタン</h2>
+    <p>再生ビューの右端には 4 つのボタンが並んでいます。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ボタン</th>
+            <th>名前</th>
+            <th>動き</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><kbd>▶</kbd></td>
+            <td>再生</td>
+            <td>選択範囲を再生します。停止中なら停止した再生位置から再開し、再生中に押すと開始位置から再生し直します（押した瞬間に反応します）。</td>
+          </tr>
+          <tr>
+            <td><kbd>■</kbd></td>
+            <td>停止</td>
+            <td>再生を停止します。再生位置はその場に留まります（押した瞬間に反応します）。</td>
+          </tr>
+          <tr>
+            <td><kbd>↩</kbd></td>
+            <td>巻き戻し</td>
+            <td>再生位置を開始位置に戻します。再生中に押すと、そのまま開始位置から再生を続けます（押した瞬間に反応します）。</td>
+          </tr>
+          <tr>
+            <td><kbd>⟲</kbd></td>
+            <td>リピート</td>
+            <td>押すたびにオン／オフを切り替えます。オンのときはボタンが緑色になり、終了位置に達すると開始位置に戻って繰り返し再生します。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>タッチ操作（シーク・バーの移動）</h2>
+    <ul>
+      <li><strong>シーク（再生位置の移動）</strong>：再生ビューをタップまたはドラッグすると、再生位置をその位置へ動かします。動かせる範囲は開始位置〜終了位置の間です。再生中にシークすると、そのまま新しい位置から再生を続けます。</li>
+      <li><strong>開始位置・終了位置のバーをドラッグ</strong>：波形ビューと同様に、開始位置・終了位置のバーをドラッグして動かせます。</li>
+      <li><strong>重なっているときの優先順位</strong>：通常は再生位置の操作が優先されますが、左右の余白を触ったときは端にある開始位置・終了位置のバーが優先してつかめます。</li>
+    </ul>
+
+    <h2>再生の細かい動き</h2>
+    <ul>
+      <li><strong>再生範囲の反映</strong>：再生中に開始位置・終了位置を動かしても、すぐには再生範囲に反映されません。再生ボタンを操作したとき、またはリピート再生で次の繰り返しを始めるときに新しい範囲が反映されます。</li>
+      <li><strong>再生位置のクリップ</strong>：停止中に開始位置・終了位置を動かして再生位置が選択範囲の外に出た場合は、自動的に選択範囲の端へ収められます。</li>
+      <li><strong>L / R スイッチとの連動</strong>：ステレオ音声では、<kbd>L</kbd> / <kbd>R</kbd> スイッチでオフにしたチャンネルは無音になります。再生中に切り替えるとリアルタイム（出力バッファ消化後の約 0.1 秒後）に聞こえ方が変わります。</li>
+      <li><strong>自動停止</strong>：編集コマンドを実行したとき、設定画面を開いたとき、他のアプリへ切り替えて画面が非表示になったときは、再生が自動停止します。</li>
+    </ul>
+
+    <div class="note">
+      <strong>再生できないサンプリングレートの場合：</strong>読み込んだ音声のサンプリングレートが端末のハードウェアで再生できない値のときは、「このサンプリングレートでは再生できません。サンプリングレートを変更すると再生できます。」と表示されます。「<a href="group_process_all.html">全体の加工</a>」の「サンプリングレートの変更」で対応レートに変換すると再生できるようになります。
+    </div>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="view_wave.html">&larr; 前へ：波形ビュー</a>
+      <a href="index.html">目次</a>
+      <a href="view_startend.html">次へ：開始位置・終了位置の操作ボタン群 &rarr;</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    mase (Mini Android Sound Editor) &mdash; Copyright (C) 2026 GORRY.
+  </footer>
+</body>
+</html>
