@@ -185,6 +185,7 @@ android {
         buildConfigField 'String', 'PROFILE_PROJECT_URL', javaString(profile['URL.Project'])
         buildConfigField 'String', 'PROFILE_RELEASE_URL', javaString(profile['URL.Release'])
         buildConfigField 'String', 'PROFILE_NOTICE_URL', javaString(profile['URL.Notice'])
+        buildConfigField 'String', 'PROFILE_HELP_URL', javaString(profile['URL.Help'])
     }
 
     // mp3 の書き出しに使う LAME と、その橋渡し（app/src/main/cpp）

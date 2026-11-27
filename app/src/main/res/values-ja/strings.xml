@@ -10,6 +10,7 @@
     <!-- メニュー -->
     <string name="menu">メニュー</string>
     <string name="menu_settings">設定</string>
+    <string name="menu_help">操作マニュアル</string>
     <string name="menu_about">%1$s について</string>
 
     <!-- 設定画面 -->

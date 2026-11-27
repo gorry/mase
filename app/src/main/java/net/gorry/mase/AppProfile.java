@@ -14,6 +14,8 @@ final class AppProfile {
     static final String PROJECT_URL = BuildConfig.PROFILE_PROJECT_URL;
     static final String RELEASE_URL = BuildConfig.PROFILE_RELEASE_URL;
     static final String NOTICE_URL = BuildConfig.PROFILE_NOTICE_URL;
+    /** 操作マニュアルの URL（メニューの「操作マニュアル」で開く）。なければ空 */
+    static final String HELP_URL = BuildConfig.PROFILE_HELP_URL;
 
     private AppProfile() {
     }

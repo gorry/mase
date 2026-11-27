@@ -460,6 +460,14 @@ public final class MainActivity extends Activity implements WaveformView.Host, A
             settingsDialog = new SettingsScreen(this, session).show();
             return true;
         });
+        // 操作マニュアル：Profile.ini の [URL] Help を、外のブラウザーで開く。URL がなければ、項目を出さない
+        if (!AppProfile.HELP_URL.isEmpty()) {
+            MenuItem help = menu.add(R.string.menu_help);
+            help.setOnMenuItemClickListener(item -> {
+                openUrl(AppProfile.HELP_URL);
+                return true;
+            });
+        }
         MenuItem about = menu.add(getString(R.string.menu_about, AppProfile.SHORT_TITLE));
         about.setOnMenuItemClickListener(item -> {
             showAbout();

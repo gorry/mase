@@ -1141,6 +1141,7 @@ Android 用のシンプルなサウンドエディタ。Java で作る。
 | 項目 | 動き |
 |---|---|
 | 設定 | 設定画面を開く（「設定画面」） |
+| 操作マニュアル | `Profile.ini` の [URL] Help（操作マニュアルの URL）を、アプリの外（ブラウザーなど）で開く。開けるアプリがないときは、「リンクを開けるアプリがありません。」と表示する。[URL] Help が空のときは、項目を出さない |
 | （略名）について | アプリの情報を表示する画面を開く（「アプリの情報」） |
 
 - （略名）は、`Profile.ini` の [Title] ShortText。今の値では「mase について」になる
@@ -1280,6 +1281,7 @@ Android 用のシンプルなサウンドエディタ。Java で作る。
 | [URL] Project | `AppProfile.PROJECT_URL`（今は使っていない。なくてもよい） |
 | [URL] Release | `AppProfile.RELEASE_URL`。アプリの情報の「配布元」（なくてもよい） |
 | [URL] Notice | `AppProfile.NOTICE_URL`。アプリの情報の「NOTICE」（なくてもよい） |
+| [URL] Help | `AppProfile.HELP_URL`。メニューの「操作マニュアル」で開く（なくてもよい） |
 
 - `Profile.ini` の値は書き換えない
 - [AppId] Namespace と [AppId] Android は、今は同じ値だが、別の項目として扱う（パッケージ名と、アプリ ID）

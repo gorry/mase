@@ -2,7 +2,10 @@
 
 日本語 | [English](README.en.md)
 
-<div align="center"><img src="pic/mase_Screenshot.png" width="80%" alt="Screenshot"></div>
+<div align="center">
+<div><img src="pic/mase_Screenshot.png" width="80%" alt="Screenshot"></div>
+<div><a href="https://gorry.github.io/mase/help/">[mase の操作マニュアルを表示]</div>
+</div>
 
 
 ## これはなに？
